@@ -1,0 +1,122 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+![](docxtractr-logo.png)
+
+docxtractr is an R pacakge for extracting tables out of Word documents (docx)
+
+Microsoft Word docx files provide an XML structure that is fairly
+straightforward to navigate, especially when it applies to Word tables. The
+docxtractr package provides tools to determine table count, table structure and
+extract tables from Microsoft Word docx documents.
+
+The following functions are implemented:
+
+- `read_docx`:	Read in a Word document for table extraction
+- `docx_describe_tbls`:	Returns a description of all the tables in the Word document
+- `docx_extract_tbl`:	Extract a table from a Word document
+- `docx_tbl_count`:	Get number of tables in a Word document
+
+The following data file are included:
+
+- `system.file("examples/data.docx", package="docxtractr")`: Word docx with 1 table
+- `system.file("examples/data3.docx", package="docxtractr")`: Word docx with 3 tables
+- `system.file("examples/none.docx", package="docxtractr")`: Word docx with 0 tables
+- `system.file("examples/complex.docx", package="docxtractr")`: Word docx with non-uniform tables
+
+### News
+
+- Version 0.0.0.9000 released
+
+### Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/docxtractr")
+```
+
+```{r echo=FALSE}
+options(width=120)
+```
+
+### Usage
+
+```{r sample}
+library(docxtractr)
+
+# current verison
+packageVersion("docxtractr")
+
+# one table
+doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
+
+docx_tbl_count(doc)
+
+docx_describe_tbls(doc)
+
+docx_extract_tbl(doc, 1)
+
+docx_extract_tbl(doc)
+
+docx_extract_tbl(doc, header=FALSE)
+
+# three tables
+doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
+
+docx_extract_tbl(doc3, 3)
+
+docx_tbl_count(doc3)
+
+docx_describe_tbls(doc3)
+
+# no tables
+none <- read_docx(system.file("examples/none.docx", package="docxtractr"))
+
+docx_tbl_count(none)
+
+# wrapping in try since it will return an error
+# use docx_tbl_count before trying to extract in scripts/production
+try(docx_describe_tbls(none))
+try(docx_extract_tbl(none, 2))
+
+# 5 tables, with two in sketchy formats
+complx <- read_docx(system.file("examples/complex.docx", package="docxtractr"))
+
+docx_tbl_count(complx)
+
+docx_describe_tbls(complx)
+
+docx_extract_tbl(complx, 3, header=TRUE)
+
+docx_extract_tbl(complx, 4, header=TRUE)
+
+docx_extract_tbl(complx, 5, header=TRUE)
+```
+
+### Test Results
+
+```{r}
+library(docxtractr)
+library(testthat)
+
+date()
+
+test_dir("tests/")
+```
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). 
+By participating in this project you agree to abide by its terms.
