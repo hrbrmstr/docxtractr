@@ -6,7 +6,7 @@ output:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r setup, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -39,16 +39,17 @@ The following data file are included:
 
 ### News
 
+- Version 0.0.1.9001 released - pre-CRAN flight check
 - Version 0.0.1.9000 released - read from URL
 - Version 0.0.0.9000 released
 
 ### Installation
 
-```{r eval=FALSE}
+```{r inst, eval=FALSE}
 devtools::install_github("hrbrmstr/docxtractr")
 ```
 
-```{r echo=FALSE}
+```{r opts, echo=FALSE}
 options(width=120)
 ```
 
@@ -120,7 +121,7 @@ docx_extract_tbl(complx, 5, header=TRUE)
 
 ### Test Results
 
-```{r}
+```{r test}
 library(docxtractr)
 library(testthat)
 

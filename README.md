@@ -21,6 +21,7 @@ The following data file are included:
 
 ### News
 
+-   Version 0.0.1.9001 released - pre-CRAN flight check
 -   Version 0.0.1.9000 released - read from URL
 -   Version 0.0.0.9000 released
 
@@ -37,7 +38,7 @@ library(docxtractr)
 
 # current verison
 packageVersion("docxtractr")
-#> [1] '0.0.0.9000'
+#> [1] '0.0.1.9001'
 
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
@@ -201,7 +202,7 @@ docx_describe_tbls(complx)
 #> Table 4
 #>   total cells: 11
 #>   row count  : 4
-#>   uniform    : unlikely => found differing cell counts (3, 2) across some rows 
+#>   uniform    : unlikely => found differing cell counts (3, 2) across some rows
 #>   has header : likely! => possibly [Foo, Bar, Baz]
 #> 
 #> Table 5
@@ -248,11 +249,11 @@ library(docxtractr)
 library(testthat)
 
 date()
-#> [1] "Mon Aug 24 15:44:01 2015"
+#> [1] "Mon Aug 24 19:59:01 2015"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
-#> OK: 0 SKIPPED: 0 FAILED: 0
+#> OK: 10 SKIPPED: 0 FAILED: 0
 #> 
 #> DONE
 ```

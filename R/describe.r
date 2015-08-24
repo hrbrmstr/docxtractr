@@ -33,13 +33,16 @@ docx_describe_tbls <- function(docx) {
     row_counts <- paste0(unique(cell_count_by_row), collapse=", ")
     max_cell_count <- max(cell_count_by_row)
 
-    cat(sprintf("Table %d\n  total cells: %d\n  row count  : %d\n", i, length(cells), length(rows)))
+    cat(sprintf("Table %d\n  total cells: %d\n  row count  : %d\n",
+                i, length(cells), length(rows)))
 
     # simplistic test for whether table is uniform rows x cells == cell count
     if ((max_cell_count * length(rows)) == length(cells)) {
       cat("  uniform    : likely!\n")
     } else {
-      cat(sprintf("  uniform    : unlikely => found differing cell counts (%s) across some rows \n", row_counts))
+      cat(sprintf(
+        "  uniform    : unlikely => found differing cell counts (%s) across some rows\n",
+        row_counts))
     }
 
     # microsoft has a tag for some table structure info. examine it to

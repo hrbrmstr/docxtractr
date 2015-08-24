@@ -39,7 +39,9 @@ docx_extract_tbl <- function(docx, tbl_number=1, header=TRUE, trim=TRUE) {
     dat <- dat[-1,]
   } else {
     hdr <- has_header(tbl, rows, ns)
-    if (!is.na(hdr)) message("NOTE: header=FALSE but table has a marked header row in the Word document")
+    if (!is.na(hdr)) {
+      message("NOTE: header=FALSE but table has a marked header row in the Word document")
+    }
   }
 
   rownames(dat) <- NULL
