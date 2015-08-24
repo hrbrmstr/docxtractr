@@ -28,3 +28,7 @@ has_header <- function(tbl, rows, ns) {
   }
 
 }
+
+is_url <- function(path) { grepl("^(http|ftp)s?://", path) }
+
+is_docx <- function(path) { tolower(file_ext(path)) == "docx" }

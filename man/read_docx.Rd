@@ -4,16 +4,20 @@
 \alias{read_docx}
 \title{Read in a Word document for table extraction}
 \usage{
-read_docx(path)
+read_docx(path, force = FALSE)
 }
 \arguments{
 \item{path}{path to the Word document}
 }
 \description{
-Path must be local (i.e. not a URL)
+Local file path or URL pointing to a \code{.docx} file.
 }
 \examples{
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
 class(doc)
+\dontrun{
+# from a URL
+budget <- read_docx("http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+}
 }
 

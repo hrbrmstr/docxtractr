@@ -39,6 +39,7 @@ The following data file are included:
 
 ### News
 
+- Version 0.0.1.9000 released - read from URL
 - Version 0.0.0.9000 released
 
 ### Installation
@@ -72,14 +73,26 @@ docx_extract_tbl(doc)
 
 docx_extract_tbl(doc, header=FALSE)
 
+# url 
+
+budget <- read_docx("http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+
+docx_tbl_count(budget)
+
+docx_describe_tbls(budget)
+
+docx_extract_tbl(budget, 1)
+
+docx_extract_tbl(budget, 2) 
+
 # three tables
 doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
-
-docx_extract_tbl(doc3, 3)
 
 docx_tbl_count(doc3)
 
 docx_describe_tbls(doc3)
+
+docx_extract_tbl(doc3, 3)
 
 # no tables
 none <- read_docx(system.file("examples/none.docx", package="docxtractr"))

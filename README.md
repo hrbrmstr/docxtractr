@@ -21,6 +21,7 @@ The following data file are included:
 
 ### News
 
+-   Version 0.0.1.9000 released - read from URL
 -   Version 0.0.0.9000 released
 
 ### Installation
@@ -79,19 +80,49 @@ docx_extract_tbl(doc, header=FALSE)
 #> 3    3    Fish 100.3     Bird
 #> 4    5 Pelican   -99 Kangaroo
 
+# url 
+
+budget <- read_docx("http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+
+docx_tbl_count(budget)
+#> [1] 2
+
+docx_describe_tbls(budget)
+#> Word document [http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX]
+#> 
+#> Table 1
+#>   total cells: 24
+#>   row count  : 6
+#>   uniform    : likely!
+#>   has header : unlikely
+#> 
+#> Table 2
+#>   total cells: 28
+#>   row count  : 4
+#>   uniform    : likely!
+#>   has header : unlikely
+
+docx_extract_tbl(budget, 1)
+#> Source: local data frame [5 x 4]
+#> 
+#>                                      Short-term Portfolio Long-term Portfolio Total Portfolio Values
+#> 1 Portfolio Balance (Market Value) *       $  123,651,911       $ 294,704,136          $ 418,356,047
+#> 2                    Effective Yield               0.16 %              1.42 %                 1.05 %
+#> 3             Avg. Weighted Maturity              11 Days           2.4 Years              1.7 Years
+#> 4                       Net Earnings        $      18,470      $      350,554         $      369,024
+#> 5                        Benchmark**               0.02 %              0.41 %                 0.27 %
+
+docx_extract_tbl(budget, 2) 
+#> Source: local data frame [3 x 7]
+#> 
+#>                        Amount of Funds (Market Value)  Maturity Effective Yield Interpolated Yield
+#> 1 Short-Term Portfolio                  $ 123,651,911   11 days          0.16 %             0.01 %
+#> 2  Long-Term Portfolio                  $ 294,704,136 2.4 years          1.42 %             0.41 %
+#> 3      Total Portfolio                  $ 418,356,047 1.7 years          1.05 %             0.27 %
+#> Variables not shown: Total Return Monthly (chr), Total Return Annual (chr)
+
 # three tables
 doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
-
-docx_extract_tbl(doc3, 3)
-#> Source: local data frame [6 x 2]
-#> 
-#>   Foo Bar
-#> 1  Aa  Bb
-#> 2  Dd  Ee
-#> 3  Gg  Hh
-#> 4   1   2
-#> 5  Zz  Jj
-#> 6  Tt  ii
 
 docx_tbl_count(doc3)
 #> [1] 3
@@ -117,6 +148,17 @@ docx_describe_tbls(doc3)
 #>   uniform    : likely!
 #>   has header : likely! => possibly [Foo, Bar]
 
+docx_extract_tbl(doc3, 3)
+#> Source: local data frame [6 x 2]
+#> 
+#>   Foo Bar
+#> 1  Aa  Bb
+#> 2  Dd  Ee
+#> 3  Gg  Hh
+#> 4   1   2
+#> 5  Zz  Jj
+#> 6  Tt  ii
+
 # no tables
 none <- read_docx(system.file("examples/none.docx", package="docxtractr"))
 
@@ -126,6 +168,7 @@ docx_tbl_count(none)
 # wrapping in try since it will return an error
 # use docx_tbl_count before trying to extract in scripts/production
 try(docx_describe_tbls(none))
+#> No tables in document
 try(docx_extract_tbl(none, 2))
 
 # 5 tables, with two in sketchy formats
@@ -205,7 +248,7 @@ library(docxtractr)
 library(testthat)
 
 date()
-#> [1] "Mon Aug 24 13:36:23 2015"
+#> [1] "Mon Aug 24 15:44:01 2015"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================

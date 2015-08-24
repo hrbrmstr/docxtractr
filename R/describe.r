@@ -12,7 +12,10 @@
 docx_describe_tbls <- function(docx) {
 
   ensure_docx(docx)
-  if (!docx_tbl_count(docx) > 0) stop("No tables in document", call.=FALSE)
+  if (!docx_tbl_count(docx) > 0) {
+    message("No tables in document")
+    return(invisible(NULL))
+  }
 
   ns <- docx$ns
   tbls <- docx$tbls

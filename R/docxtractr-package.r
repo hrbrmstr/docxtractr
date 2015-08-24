@@ -11,4 +11,5 @@
 #' @author Bob Rudis (@@hrbrmstr)
 #' @importFrom xml2 xml_find_all xml_text xml_ns xml_find_one xml_attrs
 #' @importFrom dplyr bind_rows
+#' @importFrom tools file_ext
 NULL
