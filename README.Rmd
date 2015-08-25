@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ![](docxtractr-logo.png)
 
-docxtractr is an R pacakge for extracting tables out of Word documents (docx)
+docxtractr is an R package for extracting tables out of Word documents (docx)
 
 Microsoft Word docx files provide an XML structure that is fairly
 straightforward to navigate, especially when it applies to Word tables. The
