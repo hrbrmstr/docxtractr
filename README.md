@@ -5,6 +5,8 @@ docxtractr is an R package for extracting tables out of Word documents (docx)
 
 Microsoft Word docx files provide an XML structure that is fairly straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
 
+Many tables in Word documents are in twisted formats where there may be labels or other oddities mixed in that make it difficult to work with the underlying data. `docxtractr` provides a function—`assign_colnames`—that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
+
 The following functions are implemented:
 
 -   `read_docx`: Read in a Word document for table extraction
@@ -326,7 +328,7 @@ library(docxtractr)
 library(testthat)
 
 date()
-#> [1] "Tue Aug 25 23:25:22 2015"
+#> [1] "Tue Aug 25 23:40:10 2015"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
