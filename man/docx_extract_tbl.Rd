@@ -27,4 +27,8 @@ desired) extract the contents of the table to a \code{data.frame}.
 doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
 docx_extract_tbl(doc3, 3)
 }
+\seealso{
+\code{\link{docx_extract_all}}, \code{\link{docx_extract_tbl}},
+         \code{\link{assign_colnames}}
+}
 

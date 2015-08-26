@@ -9,6 +9,8 @@
 #' @param header assume first row of table is a header row? (default; \code{TRUE})
 #' @param trim trim leading/trailing whitespace (if any) in cells? (default: \code{TRUE})
 #' @return \code{data.frame}
+#' @seealso \code{\link{docx_extract_all}}, \code{\link{docx_extract_tbl}},
+#'          \code{\link{assign_colnames}}
 #' @export
 #' @examples
 #' doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))

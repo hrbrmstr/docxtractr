@@ -28,7 +28,9 @@ The following functions are implemented:
 - `read_docx`:	Read in a Word document for table extraction
 - `docx_describe_tbls`:	Returns a description of all the tables in the Word document
 - `docx_extract_tbl`:	Extract a table from a Word document
+- `docx_extract_all`:	Extract all tables from a Word document
 - `docx_tbl_count`:	Get number of tables in a Word document
+- `assign_colnames`:	Make a specific row the column names for the specified data.frame
 
 The following data file are included:
 
@@ -36,9 +38,11 @@ The following data file are included:
 - `system.file("examples/data3.docx", package="docxtractr")`: Word docx with 3 tables
 - `system.file("examples/none.docx", package="docxtractr")`: Word docx with 0 tables
 - `system.file("examples/complex.docx", package="docxtractr")`: Word docx with non-uniform tables
+- `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
 
 ### News
 
+- Version 0.1.0.9000 released - new function to extract all tables and a function to cleanup column names in scraped tables
 - Version 0.0.1.9001 released - pre-CRAN flight check
 - Version 0.0.1.9000 released - read from URL
 - Version 0.0.0.9000 released
@@ -117,6 +121,26 @@ docx_extract_tbl(complx, 3, header=TRUE)
 docx_extract_tbl(complx, 4, header=TRUE)
 
 docx_extract_tbl(complx, 5, header=TRUE)
+
+# a "real" Word doc
+real_world <- read_docx(system.file("examples/realworld.docx", package="docxtractr"))
+
+docx_tbl_count(real_world)
+
+# get all the tables
+tbls <- docx_extract_all(real_world)
+
+# see table 1
+tbls[[1]]
+
+#' # make table 1 better
+assign_colnames(tbls[[1]], 2)
+
+# see table 5
+tbls[[5]]
+
+# make table 5 better
+assign_colnames(tbls[[5]], 2)
 ```
 
 ### Test Results
