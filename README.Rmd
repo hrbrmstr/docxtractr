@@ -14,16 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
+
 ![](docxtractr-logo.png)
 
-docxtractr is an R package for extracting tables out of Word documents (docx)
+docxtractr is an R package for extracting tables out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly
 straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
 
-Many tables in Word documents are in twisted formats where there may be
-labels or other oddities mixed in that make it difficult to work with the
-underlying data. `docxtractr` provides a function&mdash;`assign_colnames`&mdash;that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
+Many tables in Word documents are in twisted formats where there may be labels or other oddities mixed in that make it difficult to work with the underlying data. `docxtractr` provides a function&mdash;`assign_colnames`&mdash;that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
 
 The following functions are implemented:
 
@@ -44,6 +44,7 @@ The following data file are included:
 
 ### News
 
+- Version 0.1.1.9000 released - had to change budget docx url since it was 404'ing
 - Version 0.1.0.9000 released - new function to extract all tables and a function to cleanup column names in scraped tables
 - Version 0.0.1.9001 released - pre-CRAN flight check
 - Version 0.0.1.9000 released - read from URL
@@ -52,7 +53,9 @@ The following data file are included:
 ### Installation
 
 ```{r inst, eval=FALSE}
-devtools::install_github("hrbrmstr/docxtractr")
+# devtools::install_github("hrbrmstr/docxtractr")
+# OR 
+install.packages("docxtractr")
 ```
 
 ```{r opts, echo=FALSE}
@@ -82,7 +85,7 @@ docx_extract_tbl(doc, header=FALSE)
 
 # url 
 
-budget <- read_docx("http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+budget <- read_docx("http://rud.is/dl/1.DOCX")
 
 docx_tbl_count(budget)
 

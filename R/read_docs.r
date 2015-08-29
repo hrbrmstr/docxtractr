@@ -11,7 +11,7 @@
 #' \dontrun{
 #' # from a URL
 #' budget <- read_docx(
-#' "http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+#' "http://rud.is/dl/1.DOCX")
 #' }
 read_docx <- function(path) {
 

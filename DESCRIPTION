@@ -1,6 +1,6 @@
 Package: docxtractr
 Title: Extract Data Tables from Microsoft Word Documents
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: Microsoft Word docx files provide an XML structure that is fairly

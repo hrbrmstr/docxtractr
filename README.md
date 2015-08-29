@@ -1,7 +1,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
+
 ![](docxtractr-logo.png)
 
-docxtractr is an R package for extracting tables out of Word documents (docx)
+docxtractr is an R package for extracting tables out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
 
@@ -26,6 +28,7 @@ The following data file are included:
 
 ### News
 
+-   Version 0.1.1.9000 released - had to change budget docx url since it was 404'ing
 -   Version 0.1.0.9000 released - new function to extract all tables and a function to cleanup column names in scraped tables
 -   Version 0.0.1.9001 released - pre-CRAN flight check
 -   Version 0.0.1.9000 released - read from URL
@@ -34,7 +37,9 @@ The following data file are included:
 ### Installation
 
 ``` r
-devtools::install_github("hrbrmstr/docxtractr")
+# devtools::install_github("hrbrmstr/docxtractr")
+# OR 
+install.packages("docxtractr")
 ```
 
 ### Usage
@@ -44,7 +49,7 @@ library(docxtractr)
 
 # current verison
 packageVersion("docxtractr")
-#> [1] '0.0.1.9001'
+#> [1] '0.1.0.9000'
 
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
@@ -92,13 +97,13 @@ docx_extract_tbl(doc, header=FALSE)
 
 # url 
 
-budget <- read_docx("http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX")
+budget <- read_docx("http://rud.is/dl/1.DOCX")
 
 docx_tbl_count(budget)
 #> [1] 2
 
 docx_describe_tbls(budget)
-#> Word document [http://www.anaheim.net/docs_agend/questys_pub/MG41925/AS41964/AS41967/AI44538/DO44539/1.DOCX]
+#> Word document [http://rud.is/dl/1.DOCX]
 #> 
 #> Table 1
 #>   total cells: 24
@@ -328,7 +333,7 @@ library(docxtractr)
 library(testthat)
 
 date()
-#> [1] "Tue Aug 25 23:40:10 2015"
+#> [1] "Sat Aug 29 17:35:16 2015"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
