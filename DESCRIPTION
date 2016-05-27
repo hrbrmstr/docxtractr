@@ -12,3 +12,4 @@ License: MIT + file LICENSE
 LazyData: true
 Suggests: testthat
 Imports: tools, xml2, dplyr, utils
+Remotes: hadley/xml2
