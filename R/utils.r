@@ -11,7 +11,7 @@ has_header <- function(tbl, rows, ns) {
   # microsoft has a tag for some table structure info. examine it to
   # see if the creator of the header made the first row special which
   # will likely mean it's a header candidate
-  look <- try(xml_find_one(tbl, "./w:tblPr/w:tblLook", ns), silent=TRUE)
+  look <- try(xml_find_first(tbl, "./w:tblPr/w:tblLook", ns), silent=TRUE)
   if (inherits(look, "try-error")) {
     return(NA)
   } else {
