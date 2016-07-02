@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ![](docxtractr-logo.png)
 
-docxtractr is an R package for extracting tables out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
+docxtractr is an R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly
 straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
@@ -29,9 +29,12 @@ The following functions are implemented:
 
 - `read_docx`:	Read in a Word document for table extraction
 - `docx_describe_tbls`:	Returns a description of all the tables in the Word document
+- `docx_describe_cmntss`:	Returns a description of all the comments in the Word document
 - `docx_extract_tbl`:	Extract a table from a Word document
-- `docx_extract_all`:	Extract all tables from a Word document
+- `docx_extract_cmnts`:	Extract comments from a Word document
+- `docx_extract_all`:	Extract all tables from a Word document (deprecated)
 - `docx_tbl_count`:	Get number of tables in a Word document
+- `docx_cmnt_count`:	Get number of comments in a Word document
 - `assign_colnames`:	Make a specific row the column names for the specified data.frame
 
 The following data file are included:
@@ -40,10 +43,12 @@ The following data file are included:
 - `system.file("examples/data3.docx", package="docxtractr")`: Word docx with 3 tables
 - `system.file("examples/none.docx", package="docxtractr")`: Word docx with 0 tables
 - `system.file("examples/complex.docx", package="docxtractr")`: Word docx with non-uniform tables
+- `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
 - `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
 
 ### News
 
+- Version 0.2.0.9000 released - extract comments
 - Version 0.1.1.9000 released - had to change budget docx url since it was 404'ing
 - Version 0.1.0.9000 released - new function to extract all tables and a function to cleanup column names in scraped tables
 - Version 0.0.1.9001 released - pre-CRAN flight check
@@ -66,6 +71,8 @@ options(width=120)
 
 ```{r sample}
 library(docxtractr)
+library(tibble)
+library(dplyr)
 
 # current verison
 packageVersion("docxtractr")
@@ -146,6 +153,13 @@ tbls[[5]]
 
 # make table 5 better
 assign_colnames(tbls[[5]], 2)
+
+# comments
+cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
+
+print(cmnts)
+
+glimpse(docx_extract_all_cmnts(cmnts))
 ```
 
 ### Test Results

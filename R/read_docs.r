@@ -44,8 +44,16 @@ read_docx <- function(path) {
   # get the tables
   tbls <- xml_find_all(doc, ".//w:tbl", ns=ns)
 
+  if (file.exists(sprintf("%s/docdata/word/comments.xml", tmpd))) {
+    docmnt <- read_xml(sprintf("%s/docdata/word/comments.xml", tmpd))
+    # get the comments
+    cmnts <- xml_find_all(docmnt, ".//w:comment", ns=ns)
+  } else {
+    cmnts <- xml_find_all(doc, ".//w:comment", ns=ns)
+  }
+
   # make an object for other functions to work with
-  docx <- list(docx=doc, ns=ns, tbls=tbls, path=path)
+  docx <- list(docx=doc, ns=ns, tbls=tbls, cmnts=cmnts, path=path)
 
   # special class helps us work with these things
   class(docx) <- "docx"

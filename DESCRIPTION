@@ -1,15 +1,24 @@
 Package: docxtractr
 Title: Extract Data Tables from Microsoft Word Documents
-Version: 0.1.1.9000
+Version: 0.2.0.9000
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: Microsoft Word docx files provide an XML structure that is fairly
     straightforward to navigate, especially when it applies to Word tables. The
     docxtractr package provides tools to determine table count/structure and
     extract/clean tables from Microsoft Word docx documents.
-Depends: R (>= 3.0.0)
+Depends:
+    R (>= 3.0.0)
 License: MIT + file LICENSE
 LazyData: true
-Suggests: testthat
-Imports: tools, xml2, dplyr, utils
+Suggests:
+    testthat
+Imports:
+    tools,
+    xml2,
+    tibble,
+    purrr,
+    dplyr,
+    utils
 Remotes: hadley/xml2
+RoxygenNote: 5.0.1

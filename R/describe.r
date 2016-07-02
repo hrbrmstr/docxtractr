@@ -61,6 +61,43 @@ docx_describe_tbls <- function(docx) {
 
 }
 
+#' Returns information about the comments in the Word document
+#'
+#' @param docx \code{docx} object read with \code{read_docx}
+#' @export
+#' @examples
+#' cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
+#' docx_cmnt_count(cmnts)
+#' docx_describe_cmnts(cmnts)
+docx_describe_cmnts <- function(docx) {
+
+  ensure_docx(docx)
+  if (!docx_cmnt_count(docx) > 0) {
+    message("No comments in document")
+    return(invisible(NULL))
+  }
+
+  ns <- docx$ns
+  cmnts <- docx$cmnts
+
+  cat(sprintf("Word document [%s]\n\n", docx$path))
+
+  cat(sprintf("Found %d comments.\n", length(cmnts)))
+
+  map_df(xml_attrs(cmnts), function(x) {
+    as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
+  }) -> meta
+
+  cmnt_df <- dplyr::bind_cols(meta,
+                       cbind.data.frame(comment_text=xml_text(cmnts),
+                                        stringsAsFactors=FALSE))
+
+  aut_df <- dplyr::count(cmnt_df, author)
+  aut_df <- dplyr::arrange(aut_df, -n)
+  print(select(aut_df, author, `# Comments`=n))
+
+}
+
 #' Display information about the document
 #'
 #' @param x \code{docx} object
@@ -68,4 +105,5 @@ docx_describe_tbls <- function(docx) {
 #' @export
 print.docx <- function(x, ...) {
   docx_describe_tbls(x)
+  docx_describe_cmnts(x)
 }
