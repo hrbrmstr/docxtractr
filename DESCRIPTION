@@ -1,12 +1,14 @@
 Package: docxtractr
 Title: Extract Data Tables and Comments from Microsoft Word Documents
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: Microsoft Word docx files provide an XML structure that is fairly
     straightforward to navigate, especially when it applies to Word tables and
     comments. Tools are provided to determine table count/structure, comment count
     and also to extract/clean tables and comments from Microsoft Word docx documents.
+URL: http://github.com/hrbrmstr/docxtractr
+BugReports: https://github.com/hrbrmstr/docxtractr/issues
 Depends:
     R (>= 3.0.0)
 License: MIT + file LICENSE
