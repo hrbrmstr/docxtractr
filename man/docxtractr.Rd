@@ -4,12 +4,13 @@
 \name{docxtractr}
 \alias{docxtractr}
 \alias{docxtractr-package}
-\title{docxtractr is an R pacakge for extracting tables out of Word documents (docx)}
+\title{docxtractr is an R pacakge for extracting tables and comments out of Word documents (docx)}
 \description{
 Microsoft Word docx files provide an XML structure that is fairly
 straightforward to navigate, especially when it applies to Word tables. The
 docxtractr package provides tools to determine table count + table structure and
-extract tables from Microsoft Word docx documents.
+extract tables from Microsoft Word docx documents. It also provides tools to determine
+comment count and extract comments from Word docx documents.
 }
 \author{
 Bob Rudis (@hrbrmstr)

@@ -30,15 +30,6 @@ The following data file are included:
 -   `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
 -   `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
 
-### News
-
--   Version 0.2.0.9000 released - extract comments
--   Version 0.1.1.9000 released - had to change budget docx url since it was 404'ing
--   Version 0.1.0.9000 released - new function to extract all tables and a function to cleanup column names in scraped tables
--   Version 0.0.1.9001 released - pre-CRAN flight check
--   Version 0.0.1.9000 released - read from URL
--   Version 0.0.0.9000 released
-
 ### Installation
 
 ``` r
@@ -55,9 +46,6 @@ library(tibble)
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
-#> The following object is masked from 'package:tibble':
-#> 
-#>     tbl_df
 #> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
@@ -67,7 +55,7 @@ library(dplyr)
 
 # current verison
 packageVersion("docxtractr")
-#> [1] '0.2.0.9000'
+#> [1] '0.2.0'
 
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
@@ -331,8 +319,7 @@ print(cmnts)
 #> Word document [/Library/Frameworks/R.framework/Versions/3.3/Resources/library/docxtractr/examples/comments.docx]
 #> 
 #> Found 3 comments.
-#> Source: local data frame [1 x 2]
-#> 
+#> # A tibble: 1 x 2
 #>      author # Comments
 #>       <chr>      <int>
 #> 1 boB Rudis          3
@@ -340,11 +327,11 @@ print(cmnts)
 glimpse(docx_extract_all_cmnts(cmnts))
 #> Observations: 3
 #> Variables: 5
-#> $ id           (chr) "0", "1", "2"
-#> $ author       (chr) "boB Rudis", "boB Rudis", "boB Rudis"
-#> $ date         (chr) "2016-07-01T21:09:00Z", "2016-07-01T21:09:00Z", "2016-07-01T21:09:00Z"
-#> $ initials     (chr) "bR", "bR", "bR"
-#> $ comment_text (chr) "This is the first comment", "This is the second comment", "This is a reply to the second comm...
+#> $ id           <chr> "0", "1", "2"
+#> $ author       <chr> "boB Rudis", "boB Rudis", "boB Rudis"
+#> $ date         <chr> "2016-07-01T21:09:00Z", "2016-07-01T21:09:00Z", "2016-07-01T21:09:00Z"
+#> $ initials     <chr> "bR", "bR", "bR"
+#> $ comment_text <chr> "This is the first comment", "This is the second comment", "This is a reply to the second comm...
 ```
 
 ### Test Results
@@ -359,7 +346,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Fri Jul  1 22:01:48 2016"
+#> [1] "Tue Jul 19 22:53:01 2016"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
