@@ -20,5 +20,4 @@ Imports:
     purrr,
     dplyr,
     utils
-Remotes: hadley/xml2
 RoxygenNote: 5.0.1
