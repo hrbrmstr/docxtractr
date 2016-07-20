@@ -1,4 +1,4 @@
-#' docxtractr is an R pacakge for extracting tables and comments out of Word documents (docx)
+#' docxtractr is an R package for extracting tables and comments out of Word documents (docx)
 #'
 #' Microsoft Word docx files provide an XML structure that is fairly
 #' straightforward to navigate, especially when it applies to Word tables. The
