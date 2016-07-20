@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
 
@@ -346,7 +347,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Tue Jul 19 22:53:01 2016"
+#> [1] "Tue Jul 19 22:56:37 2016"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
