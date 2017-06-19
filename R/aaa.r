@@ -1,1 +1,1 @@
-n <- author <- meta <- NULL
+utils::globalVariables(c("n", "author", "meta"))

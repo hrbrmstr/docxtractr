@@ -31,4 +31,3 @@ docx_extract_tbl(doc3, 3)
 \code{\link{docx_extract_all}}, \code{\link{docx_extract_tbl}},
          \code{\link{assign_colnames}}
 }
-

@@ -19,4 +19,3 @@ Get number of tables in a Word document
 complx <- read_docx(system.file("examples/complex.docx", package="docxtractr"))
 docx_tbl_count(complx)
 }
-

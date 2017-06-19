@@ -21,4 +21,3 @@ docx_cmnt_count(cmnts)
 docx_describe_cmnts(cmnts)
 docx_extract_all_cmnts(cmnts)
 }
-

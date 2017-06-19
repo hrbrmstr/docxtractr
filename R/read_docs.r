@@ -36,20 +36,20 @@ read_docx <- function(path) {
   unzip(tmpf, exdir=sprintf("%s/docdata", tmpd))
 
   # read the actual XML document
-  doc <- read_xml(sprintf("%s/docdata/word/document.xml", tmpd))
+  doc <- xml2::read_xml(sprintf("%s/docdata/word/document.xml", tmpd))
 
   # extract the namespace
-  ns <- xml_ns(doc)
+  ns <- xml2::xml_ns(doc)
 
   # get the tables
-  tbls <- xml_find_all(doc, ".//w:tbl", ns=ns)
+  tbls <- xml2::xml_find_all(doc, ".//w:tbl", ns=ns)
 
   if (file.exists(sprintf("%s/docdata/word/comments.xml", tmpd))) {
     docmnt <- read_xml(sprintf("%s/docdata/word/comments.xml", tmpd))
     # get the comments
-    cmnts <- xml_find_all(docmnt, ".//w:comment", ns=ns)
+    cmnts <- xml2::xml_find_all(docmnt, ".//w:comment", ns=ns)
   } else {
-    cmnts <- xml_find_all(doc, ".//w:comment", ns=ns)
+    cmnts <- xml2::xml_find_all(doc, ".//w:comment", ns=ns)
   }
 
   # make an object for other functions to work with

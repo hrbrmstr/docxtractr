@@ -25,7 +25,7 @@
 #' docx_tbl_count(real_world)
 #'
 #' # get all the tables
-#' tbls <- docx_extract_all(real_world)
+#' tbls <- docx_extract_all_tbls(real_world)
 #'
 #' # make table 1 better
 #' assign_colnames(tbls[[1]], 2)
@@ -35,6 +35,8 @@
 assign_colnames <- function(dat, row, remove=TRUE, remove_previous=remove) {
 
   if ((row > nrow(dat)) | (row < 1)) return(dat)
+
+  d_class <- class(dat)
 
   # just in case someone shoots us a data.table or other stranger things
   dat <- data.frame(dat, stringsAsFactors=FALSE)
@@ -46,6 +48,9 @@ assign_colnames <- function(dat, row, remove=TRUE, remove_previous=remove) {
 
   dat <- dat[-(start:end),]
   rownames(dat) <- NULL
+
+  # give them back what they passed in
+  class(dat) <- d_class
 
   dat
 

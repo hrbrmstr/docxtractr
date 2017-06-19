@@ -26,10 +26,10 @@ docx_describe_tbls <- function(docx) {
 
     tbl <- tbls[[i]]
 
-    cells <- xml_find_all(tbl, "./w:tr/w:tc", ns=ns)
-    rows <- xml_find_all(tbl, "./w:tr", ns=ns)
+    cells <- xml2::xml_find_all(tbl, "./w:tr/w:tc", ns=ns)
+    rows <- xml2::xml_find_all(tbl, "./w:tr", ns=ns)
 
-    cell_count_by_row <- sapply(rows, function(row) { length(xml_find_all(row, "./w:tc", ns)) })
+    cell_count_by_row <- purrr::map_int(rows, ~{ length(xml2::xml_find_all(.x, "./w:tc", ns)) })
     row_counts <- paste0(unique(cell_count_by_row), collapse=", ")
     max_cell_count <- max(cell_count_by_row)
 
@@ -84,16 +84,17 @@ docx_describe_cmnts <- function(docx) {
 
   cat(sprintf("Found %d comments.\n", length(cmnts)))
 
-  map_df(xml_attrs(cmnts), function(x) {
+  purrr::map_df(xml_attrs(cmnts), function(x) {
     as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
   }) -> meta
 
   cmnt_df <- dplyr::bind_cols(meta,
-                       cbind.data.frame(comment_text=xml_text(cmnts),
+                       cbind.data.frame(comment_text=xml2::xml_text(cmnts),
                                         stringsAsFactors=FALSE))
 
   aut_df <- dplyr::count(cmnt_df, author)
   aut_df <- dplyr::arrange(aut_df, -n)
+
   print(select(aut_df, author, `# Comments`=n))
 
 }

@@ -1,16 +1,16 @@
 Package: docxtractr
-Title: Extract Data Tables and Comments from Microsoft Word Documents
-Version: 0.2.1
+Title: Extract Data Tables and Comments from 'Microsoft' 'Word' Documents
+Version: 0.3.0
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
-Description: Microsoft Word docx files provide an XML structure that is fairly
-    straightforward to navigate, especially when it applies to Word tables and
+Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fairly
+    straightforward to navigate, especially when it applies to 'Word' tables and
     comments. Tools are provided to determine table count/structure, comment count
-    and also to extract/clean tables and comments from Microsoft Word docx documents.
+    and also to extract/clean tables and comments from 'Microsoft Word' 'docx' documents.
 URL: http://github.com/hrbrmstr/docxtractr
 BugReports: https://github.com/hrbrmstr/docxtractr/issues
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.1.2)
 License: MIT + file LICENSE
 LazyData: true
 Suggests:
@@ -22,4 +22,4 @@ Imports:
     purrr,
     dplyr,
     utils
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

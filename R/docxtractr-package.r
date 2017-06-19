@@ -11,9 +11,9 @@
 #'
 #' @author Bob Rudis (@@hrbrmstr)
 #' @importFrom xml2 xml_find_all xml_text xml_ns xml_find_first xml_attrs
-#' @importFrom tibble data_frame as_data_frame
-#' @importFrom dplyr bind_rows bind_cols count arrange select
+#' @importFrom tibble data_frame as_data_frame as_tibble
+#' @importFrom dplyr bind_cols count arrange select
 #' @importFrom tools file_ext
-#' @importFrom utils download.file unzip
-#' @importFrom purrr map_df
+#' @importFrom utils download.file unzip globalVariables
+#' @importFrom purrr map_df map map_int map_chr map_lgl
 NULL

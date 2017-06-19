@@ -21,6 +21,7 @@ The following functions are implemented:
 -   `docx_tbl_count`: Get number of tables in a Word document
 -   `docx_cmnt_count`: Get number of comments in a Word document
 -   `assign_colnames`: Make a specific row the column names for the specified data.frame
+-   `mcga` : Make column names great again
 
 The following data file are included:
 
@@ -56,7 +57,7 @@ library(dplyr)
 
 # current verison
 packageVersion("docxtractr")
-#> [1] '0.2.0'
+#> [1] '0.3.0'
 
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
@@ -65,7 +66,7 @@ docx_tbl_count(doc)
 #> [1] 1
 
 docx_describe_tbls(doc)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.3/Resources/library/docxtractr/examples/data.docx]
+#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/data.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -74,24 +75,30 @@ docx_describe_tbls(doc)
 #>   has header : likely! => possibly [This, Is, A, Column]
 
 docx_extract_tbl(doc, 1)
-#>   This      Is     A   Column
-#> 1    1     Cat   3.4      Dog
-#> 2    3    Fish 100.3     Bird
-#> 3    5 Pelican   -99 Kangaroo
+#> # A tibble: 3 x 4
+#>    This      Is     A   Column
+#>   <chr>   <chr> <chr>    <chr>
+#> 1     1     Cat   3.4      Dog
+#> 2     3    Fish 100.3     Bird
+#> 3     5 Pelican   -99 Kangaroo
 
 docx_extract_tbl(doc)
-#>   This      Is     A   Column
-#> 1    1     Cat   3.4      Dog
-#> 2    3    Fish 100.3     Bird
-#> 3    5 Pelican   -99 Kangaroo
+#> # A tibble: 3 x 4
+#>    This      Is     A   Column
+#>   <chr>   <chr> <chr>    <chr>
+#> 1     1     Cat   3.4      Dog
+#> 2     3    Fish 100.3     Bird
+#> 3     5 Pelican   -99 Kangaroo
 
 docx_extract_tbl(doc, header=FALSE)
 #> NOTE: header=FALSE but table has a marked header row in the Word document
-#>     V1      V2    V3       V4
-#> 1 This      Is     A   Column
-#> 2    1     Cat   3.4      Dog
-#> 3    3    Fish 100.3     Bird
-#> 4    5 Pelican   -99 Kangaroo
+#> # A tibble: 4 x 4
+#>      V1      V2    V3       V4
+#>   <chr>   <chr> <chr>    <chr>
+#> 1  This      Is     A   Column
+#> 2     1     Cat   3.4      Dog
+#> 3     3    Fish 100.3     Bird
+#> 4     5 Pelican   -99 Kangaroo
 
 # url 
 
@@ -116,22 +123,23 @@ docx_describe_tbls(budget)
 #>   has header : unlikely
 
 docx_extract_tbl(budget, 1)
-#>                                      Short-term Portfolio Long-term Portfolio Total Portfolio Values
-#> 1 Portfolio Balance (Market Value) *       $  123,651,911       $ 294,704,136          $ 418,356,047
-#> 2                    Effective Yield               0.16 %              1.42 %                 1.05 %
-#> 3             Avg. Weighted Maturity              11 Days           2.4 Years              1.7 Years
-#> 4                       Net Earnings        $      18,470      $      350,554         $      369,024
-#> 5                        Benchmark**               0.02 %              0.41 %                 0.27 %
+#> # A tibble: 5 x 4
+#>                                   `` `Short-term Portfolio` `Long-term Portfolio` `Total Portfolio Values`
+#>                                <chr>                  <chr>                 <chr>                    <chr>
+#> 1 Portfolio Balance (Market Value) *         $  123,651,911         $ 294,704,136            $ 418,356,047
+#> 2                    Effective Yield                 0.16 %                1.42 %                   1.05 %
+#> 3             Avg. Weighted Maturity                11 Days             2.4 Years                1.7 Years
+#> 4                       Net Earnings          $      18,470        $      350,554           $      369,024
+#> 5                        Benchmark**                 0.02 %                0.41 %                   0.27 %
 
 docx_extract_tbl(budget, 2) 
-#>                        Amount of Funds (Market Value)  Maturity Effective Yield Interpolated Yield
-#> 1 Short-Term Portfolio                  $ 123,651,911   11 days          0.16 %             0.01 %
-#> 2  Long-Term Portfolio                  $ 294,704,136 2.4 years          1.42 %             0.41 %
-#> 3      Total Portfolio                  $ 418,356,047 1.7 years          1.05 %             0.27 %
-#>   Total Return  Monthly Total Return    Annual
-#> 1                 0.013                  0.160
-#> 2                 0.437                  0.250
-#> 3                 0.298                  0.222
+#> # A tibble: 3 x 7
+#>                     `` `Amount of Funds (Market Value)`  Maturity `Effective Yield` `Interpolated Yield`
+#>                  <chr>                            <chr>     <chr>             <chr>                <chr>
+#> 1 Short-Term Portfolio                    $ 123,651,911   11 days            0.16 %               0.01 %
+#> 2  Long-Term Portfolio                    $ 294,704,136 2.4 years            1.42 %               0.41 %
+#> 3      Total Portfolio                    $ 418,356,047 1.7 years            1.05 %               0.27 %
+#> # ... with 2 more variables: `Total Return Monthly` <chr>, `Total Return Annual` <chr>
 
 # three tables
 doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
@@ -140,7 +148,7 @@ docx_tbl_count(doc3)
 #> [1] 3
 
 docx_describe_tbls(doc3)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.3/Resources/library/docxtractr/examples/data3.docx]
+#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/data3.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -161,13 +169,15 @@ docx_describe_tbls(doc3)
 #>   has header : likely! => possibly [Foo, Bar]
 
 docx_extract_tbl(doc3, 3)
-#>   Foo Bar
-#> 1  Aa  Bb
-#> 2  Dd  Ee
-#> 3  Gg  Hh
-#> 4   1   2
-#> 5  Zz  Jj
-#> 6  Tt  ii
+#> # A tibble: 6 x 2
+#>     Foo   Bar
+#>   <chr> <chr>
+#> 1    Aa    Bb
+#> 2    Dd    Ee
+#> 3    Gg    Hh
+#> 4     1     2
+#> 5    Zz    Jj
+#> 6    Tt    ii
 
 # no tables
 none <- read_docx(system.file("examples/none.docx", package="docxtractr"))
@@ -188,7 +198,7 @@ docx_tbl_count(complx)
 #> [1] 5
 
 docx_describe_tbls(complx)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.3/Resources/library/docxtractr/examples/complex.docx]
+#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/complex.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -221,28 +231,34 @@ docx_describe_tbls(complx)
 #>   has header : unlikely
 
 docx_extract_tbl(complx, 3, header=TRUE)
-#>   Foo Bar
-#> 1  Aa  Bb
-#> 2  Dd  Ee
-#> 3  Gg  Hh
-#> 4   1   2
-#> 5  Zz  Jj
-#> 6  Tt  ii
+#> # A tibble: 6 x 2
+#>     Foo   Bar
+#>   <chr> <chr>
+#> 1    Aa    Bb
+#> 2    Dd    Ee
+#> 3    Gg    Hh
+#> 4     1     2
+#> 5    Zz    Jj
+#> 6    Tt    ii
 
 docx_extract_tbl(complx, 4, header=TRUE)
-#>   Foo  Bar  Baz
-#> 1  Aa BbCc <NA>
-#> 2  Dd   Ee   Ff
-#> 3  Gg   Hh   ii
+#> # A tibble: 3 x 3
+#>     Foo   Bar   Baz
+#>   <chr> <chr> <chr>
+#> 1    Aa  BbCc  <NA>
+#> 2    Dd    Ee    Ff
+#> 3    Gg    Hh    ii
 
 docx_extract_tbl(complx, 5, header=TRUE)
-#>    Foo Bar Baz
-#> 1   Aa  Bb  Cc
-#> 2   Dd  Ee  Ff
-#> 3   Gg  Hh  Ii
-#> 4 Jj88  Kk  Ll
-#> 5       Uu  Ii
-#> 6   Hh  Ii   h
+#> # A tibble: 6 x 3
+#>     Foo   Bar   Baz
+#>   <chr> <chr> <chr>
+#> 1    Aa    Bb    Cc
+#> 2    Dd    Ee    Ff
+#> 3    Gg    Hh    Ii
+#> 4  Jj88    Kk    Ll
+#> 5          Uu    Ii
+#> 6    Hh    Ii     h
 
 # a "real" Word doc
 real_world <- read_docx(system.file("examples/realworld.docx", package="docxtractr"))
@@ -256,7 +272,9 @@ tbls <- docx_extract_all(real_world)
 
 # see table 1
 tbls[[1]]
+#> # A tibble: 9 x 9
 #>                  V1        V2         V3                     V4                     V5
+#>               <chr>     <chr>      <chr>                  <chr>                  <chr>
 #> 1 Lesson 1:  Step 1      <NA>       <NA>                   <NA>                   <NA>
 #> 2           Country Birthrate Death Rate Population Growth 2005 Population Growth 2050
 #> 3               USA      2.06      0.51%                  0.92%                 -0.06%
@@ -266,20 +284,27 @@ tbls[[1]]
 #> 7             Italy      1.28      0.72%                  0.35%                 -1.33%
 #> 8            Mexico      2.43      0.25%                  1.41%                  0.96%
 #> 9           Nigeria      4.78      0.26%                  2.46%                  3.58%
-#>                                    V6                      V7                   V8                              V9
-#> 1                                <NA>                    <NA>                 <NA>                            <NA>
-#> 2        Relative place in Transition        Social Factors 1     Social Factors 2                Social Factors 3
-#> 3                    Post- Industrial     Female Independence    Stable Birth Rate                 Good technology
-#> 4                    Post- Industrial Government intervention           Technology                    Urbanization
-#> 5                   Mature Industrial  Not yet industrialized More children needed Slightly higher life expectancy
-#> 6                     Post Industrial         Economic growth              Poverty    Becoming more industrialized
-#> 7                Late Post industrial       Stable birth rate   People marry later              Better health care
-#> 8                   Mature Industrial      Better health care           Emigration                 Economic growth
-#> 9 End of Mechanization of Agriculture                 Disease   People marry early       People have many children
+#> # ... with 4 more variables: V6 <chr>, V7 <chr>, V8 <chr>, V9 <chr>
 
-#' # make table 1 better
+# make table 1 better
 assign_colnames(tbls[[1]], 2)
-#>   Country Birthrate Death Rate Population Growth 2005 Population Growth 2050        Relative place in Transition
+#> # A tibble: 7 x 9
+#>   Country Birthrate `Death Rate` `Population Growth 2005` `Population Growth 2050`      `Relative place in Transition`
+#>     <chr>     <chr>        <chr>                    <chr>                    <chr>                               <chr>
+#> 1     USA      2.06        0.51%                    0.92%                   -0.06%                    Post- Industrial
+#> 2   China      1.62         0.3%                     0.6%                   -0.58%                    Post- Industrial
+#> 3   Egypt      2.83        0.41%                     2.0%                    1.32%                   Mature Industrial
+#> 4   India      2.35        0.34%                    1.56%                    0.76%                     Post Industrial
+#> 5   Italy      1.28        0.72%                    0.35%                   -1.33%                Late Post industrial
+#> 6  Mexico      2.43        0.25%                    1.41%                    0.96%                   Mature Industrial
+#> 7 Nigeria      4.78        0.26%                    2.46%                    3.58% End of Mechanization of Agriculture
+#> # ... with 3 more variables: `Social Factors 1` <chr>, `Social Factors 2` <chr>, `Social Factors 3` <chr>
+
+# make table 1's column names great again 
+mcga(assign_colnames(tbls[[1]], 2))
+#> # A tibble: 7 x 9
+#>   country birthrate death_rate population_growth_2005 population_growth_2050        relative_place_in_transition
+#>     <chr>     <chr>      <chr>                  <chr>                  <chr>                               <chr>
 #> 1     USA      2.06      0.51%                  0.92%                 -0.06%                    Post- Industrial
 #> 2   China      1.62       0.3%                   0.6%                 -0.58%                    Post- Industrial
 #> 3   Egypt      2.83      0.41%                   2.0%                  1.32%                   Mature Industrial
@@ -287,18 +312,13 @@ assign_colnames(tbls[[1]], 2)
 #> 5   Italy      1.28      0.72%                  0.35%                 -1.33%                Late Post industrial
 #> 6  Mexico      2.43      0.25%                  1.41%                  0.96%                   Mature Industrial
 #> 7 Nigeria      4.78      0.26%                  2.46%                  3.58% End of Mechanization of Agriculture
-#>          Social Factors 1     Social Factors 2                Social Factors 3
-#> 1     Female Independence    Stable Birth Rate                 Good technology
-#> 2 Government intervention           Technology                    Urbanization
-#> 3  Not yet industrialized More children needed Slightly higher life expectancy
-#> 4         Economic growth              Poverty    Becoming more industrialized
-#> 5       Stable birth rate   People marry later              Better health care
-#> 6      Better health care           Emigration                 Economic growth
-#> 7                 Disease   People marry early       People have many children
+#> # ... with 3 more variables: social_factors_1 <chr>, social_factors_2 <chr>, social_factors_3 <chr>
 
 # see table 5
 tbls[[5]]
+#> # A tibble: 5 x 6
 #>                  V1      V2            V3        V4        V5       V6
+#>               <chr>   <chr>         <chr>     <chr>     <chr>    <chr>
 #> 1 Lesson 2:  Step 1    <NA>          <NA>      <NA>      <NA>     <NA>
 #> 2           Nigeria Default    Prediction + 5 years +15 years -5 years
 #> 3        Birth rate    4.78     Goes Down      4.76      4.72     4.79
@@ -307,23 +327,25 @@ tbls[[5]]
 
 # make table 5 better
 assign_colnames(tbls[[5]], 2)
-#>             Nigeria Default    Prediction + 5 years +15 years -5 years
-#> 1        Birth rate    4.78     Goes Down      4.76      4.72     4.79
-#> 2        Death rate   0.36% Stay the Same     0.42%     0.52%     0.3%
-#> 3 Population growth   3.58%     Goes Down     3.02%     2.32%    4.38%
+#> # A tibble: 3 x 6
+#>             Nigeria Default    Prediction `+ 5 years` `+15 years` `-5 years`
+#>               <chr>   <chr>         <chr>       <chr>       <chr>      <chr>
+#> 1        Birth rate    4.78     Goes Down        4.76        4.72       4.79
+#> 2        Death rate   0.36% Stay the Same       0.42%       0.52%       0.3%
+#> 3 Population growth   3.58%     Goes Down       3.02%       2.32%      4.38%
 
 # comments
 cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 
 print(cmnts)
 #> No tables in document
-#> Word document [/Library/Frameworks/R.framework/Versions/3.3/Resources/library/docxtractr/examples/comments.docx]
+#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/comments.docx]
 #> 
 #> Found 3 comments.
 #> # A tibble: 1 x 2
-#>      author # Comments
-#>       <chr>      <int>
-#> 1 boB Rudis          3
+#>      author `# Comments`
+#>       <chr>        <int>
+#> 1 boB Rudis            3
 
 glimpse(docx_extract_all_cmnts(cmnts))
 #> Observations: 3
@@ -347,7 +369,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Tue Jul 19 22:56:37 2016"
+#> [1] "Mon Jun 19 05:52:59 2017"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================

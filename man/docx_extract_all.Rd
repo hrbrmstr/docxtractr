@@ -33,4 +33,3 @@ tbls <- docx_extract_all_tbls(real_world)
 \seealso{
 \code{\link{assign_colnames}}, \code{\link{docx_extract_tbl}}
 }
-
