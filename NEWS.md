@@ -5,7 +5,7 @@
 - don't stomp on data frame-ish input type in `assign_colnames()`
 - prefix `::` (non-user facing tweak)
 - switch all `*apply()` to `purrr` calls since we bother to import `purrr`  (non-user facing tweak)
-- 
+- Make Column Names Great Again! (`mgca()` function added)
 
 # 0.2.0 released
 
