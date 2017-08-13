@@ -18,6 +18,7 @@ mcga <- function(tbl) {
   x <- gsub("[[:punct:][:space:]]+", "_", x)
   x <- gsub("_+", "_", x)
   x <- gsub("(^_|_$)", "", x)
+  x <- make.unique(x, sep = "_")
 
   colnames(tbl) <- x
 
