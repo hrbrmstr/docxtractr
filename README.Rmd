@@ -34,6 +34,7 @@ The following functions are implemented:
 - `docx_tbl_count`:	Get number of tables in a Word document
 - `docx_cmnt_count`:	Get number of comments in a Word document
 - `assign_colnames`:	Make a specific row the column names for the specified data.frame
+- `mcga` : Make column names great again
 
 The following data file are included:
 
@@ -134,8 +135,11 @@ tbls <- docx_extract_all(real_world)
 # see table 1
 tbls[[1]]
 
-#' # make table 1 better
+# make table 1 better
 assign_colnames(tbls[[1]], 2)
+
+# make table 1's column names great again 
+mcga(assign_colnames(tbls[[1]], 2))
 
 # see table 5
 tbls[[5]]

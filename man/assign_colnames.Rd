@@ -37,7 +37,7 @@ real_world <- read_docx(system.file("examples/realworld.docx", package="docxtrac
 docx_tbl_count(real_world)
 
 # get all the tables
-tbls <- docx_extract_all(real_world)
+tbls <- docx_extract_all_tbls(real_world)
 
 # make table 1 better
 assign_colnames(tbls[[1]], 2)

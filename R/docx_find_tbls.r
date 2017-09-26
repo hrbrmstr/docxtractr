@@ -25,16 +25,15 @@ docx_extract_tbl <- function(docx, tbl_number=1, header=TRUE, trim=TRUE) {
   ns <- docx$ns
   tbl <- docx$tbls[[tbl_number]]
 
-  cells <- xml_find_all(tbl, "./w:tr/w:tc", ns=ns)
-  rows <- xml_find_all(tbl, "./w:tr", ns=ns)
+  cells <- xml2::xml_find_all(tbl, "./w:tr/w:tc", ns=ns)
+  rows <- xml2::xml_find_all(tbl, "./w:tr", ns=ns)
 
-  bind_rows(lapply(rows, function(row) {
-
-    vals <- xml_text(xml_find_all(row, "./w:tc", ns=ns), trim=trim)
+  purrr::map_df(rows, ~{
+    vals <- xml2::xml_text(xml2::xml_find_all(.x, "./w:tc", ns=ns), trim=trim)
     names(vals) <- sprintf("V%d", 1:length(vals))
-    data.frame(as.list(vals), stringsAsFactors=FALSE)
-
-  })) -> dat
+    as.list(vals)
+    # data.frame(as.list(vals), stringsAsFactors=FALSE)
+  }) -> dat
 
   if (header) {
     colnames(dat) <- dat[1,]
@@ -48,7 +47,7 @@ docx_extract_tbl <- function(docx, tbl_number=1, header=TRUE, trim=TRUE) {
 
   rownames(dat) <- NULL
 
-  dat
+  tibble::as_tibble(dat)
 
 }
 

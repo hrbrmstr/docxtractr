@@ -27,7 +27,7 @@ docx_extract_all_tbls <- function(docx, guess_header=TRUE, trim=TRUE) {
     hdr <- FALSE
     if (guess_header) {
       tbl <- docx$tbls[[i]]
-      rows <- xml_find_all(tbl, "./w:tr", ns=ns)
+      rows <- xml2::xml_find_all(tbl, "./w:tr", ns=ns)
       hdr <- !is.na(has_header(tbl, rows, ns))
     }
     docx_extract_tbl(docx, i, hdr, trim)
@@ -77,12 +77,14 @@ docx_extract_all_cmnts <- function(docx) {
 
   comments <- docx$cmnts
 
-  map_df(xml_attrs(comments), function(x) {
+  purrr::map_df(xml2::xml_attrs(comments), function(x) {
     as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
   }) -> meta
 
   bind_cols(meta,
-            cbind.data.frame(comment_text=xml_text(comments),
-                             stringsAsFactors=FALSE))
+            cbind.data.frame(comment_text=xml2::xml_text(comments),
+                             stringsAsFactors=FALSE)) -> out
+
+  as_tibble(out)
 
 }
