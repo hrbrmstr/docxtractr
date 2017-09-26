@@ -1,3 +1,8 @@
+# 0.4.0 WIP
+
+- add a `preserve` logical paramater to tbl extraction functions to support preserving
+  intra-cell whitespace (ref: #9)
+
 # 0.3.0 WIP
 
 - return tibbles where possible & not stomping on input type (#7)

@@ -16,12 +16,16 @@ knitr::opts_chunk$set(
 
 ![](docxtractr-logo.png)
 
-docxtractr is an R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
+# docxtractr 
+
+An R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly
 straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
 
 Many tables in Word documents are in twisted formats where there may be labels or other oddities mixed in that make it difficult to work with the underlying data. `docxtractr` provides a function&mdash;`assign_colnames`&mdash;that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
+
+## What's in the tin?
 
 The following functions are implemented:
 
@@ -45,7 +49,7 @@ The following data file are included:
 - `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
 - `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
 
-### Installation
+## Installation
 
 ```{r inst, eval=FALSE}
 # devtools::install_github("hrbrmstr/docxtractr")
@@ -57,7 +61,7 @@ install.packages("docxtractr")
 options(width=120)
 ```
 
-### Usage
+## Usage
 
 ```{r sample}
 library(docxtractr)
@@ -147,6 +151,12 @@ tbls[[5]]
 # make table 5 better
 assign_colnames(tbls[[5]], 2)
 
+# preserve lines
+intracell_whitespace <- read_docx(system.file("examples/preserve.docx", package="docxtractr"))
+docx_extract_all_tbls(intracell_whitespace, preserve=TRUE)
+
+docx_extract_all_tbls(intracell_whitespace)
+
 # comments
 cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 
@@ -155,7 +165,7 @@ print(cmnts)
 glimpse(docx_extract_all_cmnts(cmnts))
 ```
 
-### Test Results
+## Test Results
 
 ```{r test}
 library(docxtractr)

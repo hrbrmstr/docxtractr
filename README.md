@@ -4,11 +4,17 @@
 
 ![](docxtractr-logo.png)
 
-docxtractr is an R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
+docxtractr
+==========
+
+An R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
 
 Many tables in Word documents are in twisted formats where there may be labels or other oddities mixed in that make it difficult to work with the underlying data. `docxtractr` provides a function—`assign_colnames`—that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
+
+What's in the tin?
+------------------
 
 The following functions are implemented:
 
@@ -32,7 +38,8 @@ The following data file are included:
 -   `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
 -   `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
 
-### Installation
+Installation
+------------
 
 ``` r
 # devtools::install_github("hrbrmstr/docxtractr")
@@ -40,7 +47,8 @@ The following data file are included:
 install.packages("docxtractr")
 ```
 
-### Usage
+Usage
+-----
 
 ``` r
 library(docxtractr)
@@ -57,7 +65,7 @@ library(dplyr)
 
 # current verison
 packageVersion("docxtractr")
-#> [1] '0.3.0'
+#> [1] '0.4.0'
 
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
@@ -334,6 +342,60 @@ assign_colnames(tbls[[5]], 2)
 #> 2        Death rate   0.36% Stay the Same       0.42%       0.52%       0.3%
 #> 3 Population growth   3.58%     Goes Down       3.02%       2.32%      4.38%
 
+# preserve lines
+intracell_whitespace <- read_docx(system.file("examples/preserve.docx", package="docxtractr"))
+docx_extract_all_tbls(intracell_whitespace, preserve=TRUE)
+#> [[1]]
+#> # A tibble: 6 x 2
+#>   `Test1:`                                   Apple
+#>      <chr>                                   <chr>
+#> 1   Test2:                                  Banana
+#> 2   Test3:                       "Cranberry\nDark"
+#> 3   Test4:               "Elephant, Farm\nGrandpa"
+#> 4   Test5:                "Hat\nIgloo\nJackrabbit"
+#> 5   Test6: " \nQuestion1\n[ ] Underwear\n[ ] VM\n"
+#> 6   Test7:                                    Warm
+#> 
+#> [[2]]
+#> # A tibble: 2 x 4
+#>      ``  Kite      Lemur Madagascar
+#>   <chr> <chr>      <chr>      <chr>
+#> 1 Nanny  Open       Port    Quarter
+#> 2  Rain  Sand Television    Unicorn
+#> 
+#> [[3]]
+#> # A tibble: 2 x 2
+#>   `Test8:`              `Xylophone\nYew`
+#>      <chr>                         <chr>
+#> 1   Test9:                         Zebra
+#> 2  Test10: "Apple2\nBanana2\nCranberry2"
+
+docx_extract_all_tbls(intracell_whitespace)
+#> [[1]]
+#> # A tibble: 6 x 2
+#>   `Test1:`                                                                                         Apple
+#>      <chr>                                                                                         <chr>
+#> 1   Test2:                                                                                        Banana
+#> 2   Test3:                                                                                 CranberryDark
+#> 3   Test4:                                                                         Elephant, FarmGrandpa
+#> 4   Test5:                                                                            HatIglooJackrabbit
+#> 5   Test6: KiteLemurMadagascarNannyOpenPortQuarterRainSandTelevisionUnicorn Question1[ ] Underwear[ ] VM
+#> 6   Test7:                                                                                          Warm
+#> 
+#> [[2]]
+#> # A tibble: 2 x 4
+#>      ``  Kite      Lemur Madagascar
+#>   <chr> <chr>      <chr>      <chr>
+#> 1 Nanny  Open       Port    Quarter
+#> 2  Rain  Sand Television    Unicorn
+#> 
+#> [[3]]
+#> # A tibble: 2 x 2
+#>   `Test8:`            XylophoneYew
+#>      <chr>                   <chr>
+#> 1   Test9:                   Zebra
+#> 2  Test10: Apple2Banana2Cranberry2
+
 # comments
 cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 
@@ -357,7 +419,8 @@ glimpse(docx_extract_all_cmnts(cmnts))
 #> $ comment_text <chr> "This is the first comment", "This is the second comment", "This is a reply to the second comm...
 ```
 
-### Test Results
+Test Results
+------------
 
 ``` r
 library(docxtractr)
@@ -369,7 +432,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Mon Jun 19 05:52:59 2017"
+#> [1] "Tue Sep 26 15:24:28 2017"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================

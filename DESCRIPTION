@@ -1,6 +1,6 @@
 Package: docxtractr
 Title: Extract Data Tables and Comments from 'Microsoft' 'Word' Documents
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fairly
