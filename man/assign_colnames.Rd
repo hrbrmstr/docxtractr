@@ -48,4 +48,3 @@ assign_colnames(tbls[[5]], 2)
 \seealso{
 \code{\link{docx_extract_all}}, \code{\link{docx_extract_tbl}}
 }
-

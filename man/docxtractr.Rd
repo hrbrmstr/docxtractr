@@ -15,4 +15,3 @@ comment count and extract comments from Word docx documents.
 \author{
 Bob Rudis (@hrbrmstr)
 }
-

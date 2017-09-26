@@ -21,4 +21,3 @@ budget <- read_docx(
 "http://rud.is/dl/1.DOCX")
 }
 }
-

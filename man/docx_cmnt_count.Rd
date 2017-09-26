@@ -19,4 +19,3 @@ Get number of comments in a Word document
 cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 docx_cmnt_count(cmnts)
 }
-

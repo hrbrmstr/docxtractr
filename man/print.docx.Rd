@@ -14,4 +14,3 @@
 \description{
 Display information about the document
 }
-
