@@ -31,10 +31,10 @@ The following functions are implemented:
 
 - `read_docx`:	Read in a Word document for table extraction
 - `docx_describe_tbls`:	Returns a description of all the tables in the Word document
-- `docx_describe_cmntss`:	Returns a description of all the comments in the Word document
+- `docx_describe_cmnts`:	Returns a description of all the comments in the Word document
 - `docx_extract_tbl`:	Extract a table from a Word document
 - `docx_extract_cmnts`:	Extract comments from a Word document
-- `docx_extract_all`:	Extract all tables from a Word document (deprecated)
+- `docx_extract_all_tbls`:	Extract all tables from a Word document (`docx_extract_all` is now deprecated)
 - `docx_tbl_count`:	Get number of tables in a Word document
 - `docx_cmnt_count`:	Get number of comments in a Word document
 - `assign_colnames`:	Make a specific row the column names for the specified data.frame
@@ -68,7 +68,7 @@ library(docxtractr)
 library(tibble)
 library(dplyr)
 
-# current verison
+# current version
 packageVersion("docxtractr")
 
 # one table
@@ -134,7 +134,7 @@ real_world <- read_docx(system.file("examples/realworld.docx", package="docxtrac
 docx_tbl_count(real_world)
 
 # get all the tables
-tbls <- docx_extract_all(real_world)
+tbls <- docx_extract_all_tbls(real_world)
 
 # see table 1
 tbls[[1]]
