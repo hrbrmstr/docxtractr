@@ -1,7 +1,7 @@
 #' Extract all tables from a Word document
 #'
 #' @param docx \code{docx} object read with \code{read_docx}
-#' @param guess_header should the function make a guess as to the existense of
+#' @param guess_header should the function make a guess as to the existence of
 #'        a header in a table? (Default: \code{TRUE})
 #' @param preserve preserve line breaks within a cell? Default: `FALSE`. NOTE: This overrides `trim`.
 #' @param trim trim leading/trailing whitespace (if any) in cells? (default: \code{TRUE})
@@ -39,7 +39,7 @@ docx_extract_all_tbls <- function(docx, guess_header=TRUE, preserve=FALSE, trim=
 #' Extract all tables from a Word document
 #'
 #' @param docx \code{docx} object read with \code{read_docx}
-#' @param guess_header should the function make a guess as to the existense of
+#' @param guess_header should the function make a guess as to the existence of
 #'        a header in a table? (Default: \code{TRUE})
 #' @param preserve preserve line breaks within a cell? Default: `FALSE`. NOTE: This overrides `trim`.
 #' @param trim trim leading/trailing whitespace (if any) in cells? (default: \code{TRUE})
