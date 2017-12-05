@@ -31,8 +31,8 @@ doc3 <- read_docx(system.file("examples/data3.docx", package="docxtractr"))
 docx_extract_tbl(doc3, 3)
 
 intracell_whitespace <- read_docx(system.file("examples/preserve.docx", package="docxtractr"))
-docx_extract_tbl(intracell_whitespace, 3, preserve=FALSE)
-docx_extract_tbl(intracell_whitespace, 3, preserve=TRUE)
+docx_extract_tbl(intracell_whitespace, 2, preserve=FALSE)
+docx_extract_tbl(intracell_whitespace, 2, preserve=TRUE)
 }
 \seealso{
 \code{\link{docx_extract_all}}, \code{\link{docx_extract_tbl}},
