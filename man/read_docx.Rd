@@ -17,7 +17,5 @@ doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
 class(doc)
 \dontrun{
 # from a URL
-budget <- read_docx(
-"http://rud.is/dl/1.DOCX")
 }
 }

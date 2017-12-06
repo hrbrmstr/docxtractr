@@ -10,8 +10,8 @@
 #' class(doc)
 #' \dontrun{
 #' # from a URL
-#' budget <- read_docx(
-#' "http://rud.is/dl/1.DOCX")
+# budget <- read_docx(
+# "http://rud.is/dl/1.DOCX")
 #' }
 read_docx <- function(path) {
 
@@ -25,7 +25,8 @@ read_docx <- function(path) {
   })
 
   if (is_url(path)) {
-    download.file(path, tmpf)
+    res <- httr::GET(path, write_disk(tmpf))
+    httr::stop_for_status(res)
   } else {
     path <- path.expand(path)
     if (!file.exists(path)) stop(sprintf("Cannot find '%s'", path), call.=FALSE)

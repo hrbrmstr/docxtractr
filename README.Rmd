@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 
 # docxtractr 
 
+Extract Data Tables and Comments from 'Microsoft' 'Word' Documents
+
+## Description 
+
 An R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly

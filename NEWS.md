@@ -1,7 +1,8 @@
-# 0.4.0 WIP
+# 0.4.0
 
 - add a `preserve` logical paramater to tbl extraction functions to support preserving
-  intra-cell whitespace (ref: #9)
+  intra-cell whitespace (implements #9)
+- use `httr` vs `download.file()` for URL retrieval (fixes #10)
 
 # 0.3.0 WIP
 
@@ -10,7 +11,7 @@
 - don't stomp on data frame-ish input type in `assign_colnames()`
 - prefix `::` (non-user facing tweak)
 - switch all `*apply()` to `purrr` calls since we bother to import `purrr`  (non-user facing tweak)
-- Make Column Names Great Again! (`mgca()` function added)
+- Make Column Names Great Again! (`mgca()` function added. The `janitor` package has a more robust function.)
 
 # 0.2.0 released
 
