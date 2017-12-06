@@ -1,4 +1,4 @@
-# used by cuntions to make sure they are working with a well-formed docx object
+# used by functions to make sure they are working with a well-formed docx object
 ensure_docx <- function(docx) {
   if (!inherits(docx, "docx")) stop("Must pass in a 'docx' object", call.=FALSE)
   if (!(all(purrr::map_lgl(c("docx", "ns", "tbls", "path"), exists, where=docx))))

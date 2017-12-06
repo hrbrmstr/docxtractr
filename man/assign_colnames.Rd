@@ -16,7 +16,7 @@ the column names}
 \item{remove}{remove row specified by \code{row} after making it
 the column names? (Default: \code{TRUE})}
 
-\item{remove_previous}{remove any rows preceeding \code{row}? (Default:
+\item{remove_previous}{remove any rows preceding \code{row}? (Default:
 \code{TRUE} but will be assigned whatever is given for
 \code{remove}).}
 }

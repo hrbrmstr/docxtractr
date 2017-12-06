@@ -9,7 +9,7 @@ docx_extract_all(docx, guess_header = TRUE, preserve = FALSE, trim = TRUE)
 \arguments{
 \item{docx}{\code{docx} object read with \code{read_docx}}
 
-\item{guess_header}{should the function make a guess as to the existense of
+\item{guess_header}{should the function make a guess as to the existence of
 a header in a table? (Default: \code{TRUE})}
 
 \item{preserve}{preserve line breaks within a cell? Default: `FALSE`. NOTE: This overrides `trim`.}
