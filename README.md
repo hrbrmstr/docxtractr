@@ -7,6 +7,11 @@
 docxtractr
 ==========
 
+Extract Data Tables and Comments from 'Microsoft' 'Word' Documents
+
+Description
+-----------
+
 An R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
 Microsoft Word docx files provide an XML structure that is fairly straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
@@ -20,10 +25,10 @@ The following functions are implemented:
 
 -   `read_docx`: Read in a Word document for table extraction
 -   `docx_describe_tbls`: Returns a description of all the tables in the Word document
--   `docx_describe_cmntss`: Returns a description of all the comments in the Word document
+-   `docx_describe_cmnts`: Returns a description of all the comments in the Word document
 -   `docx_extract_tbl`: Extract a table from a Word document
 -   `docx_extract_cmnts`: Extract comments from a Word document
--   `docx_extract_all`: Extract all tables from a Word document (deprecated)
+-   `docx_extract_all_tbls`: Extract all tables from a Word document (`docx_extract_all` is now deprecated)
 -   `docx_tbl_count`: Get number of tables in a Word document
 -   `docx_cmnt_count`: Get number of comments in a Word document
 -   `assign_colnames`: Make a specific row the column names for the specified data.frame
@@ -63,7 +68,7 @@ library(dplyr)
 #> 
 #>     intersect, setdiff, setequal, union
 
-# current verison
+# current version
 packageVersion("docxtractr")
 #> [1] '0.4.0'
 
@@ -74,7 +79,7 @@ docx_tbl_count(doc)
 #> [1] 1
 
 docx_describe_tbls(doc)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/data.docx]
+#> Word document [C:/Users/Mark/Documents/R/win-library/3.4/docxtractr/examples/data.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -156,7 +161,7 @@ docx_tbl_count(doc3)
 #> [1] 3
 
 docx_describe_tbls(doc3)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/data3.docx]
+#> Word document [C:/Users/Mark/Documents/R/win-library/3.4/docxtractr/examples/data3.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -206,7 +211,7 @@ docx_tbl_count(complx)
 #> [1] 5
 
 docx_describe_tbls(complx)
-#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/complex.docx]
+#> Word document [C:/Users/Mark/Documents/R/win-library/3.4/docxtractr/examples/complex.docx]
 #> 
 #> Table 1
 #>   total cells: 16
@@ -275,8 +280,7 @@ docx_tbl_count(real_world)
 #> [1] 8
 
 # get all the tables
-tbls <- docx_extract_all(real_world)
-#> docx_extract_all() is deprecated; use docx_extract_all_tbls()
+tbls <- docx_extract_all_tbls(real_world)
 
 # see table 1
 tbls[[1]]
@@ -401,7 +405,7 @@ cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 
 print(cmnts)
 #> No tables in document
-#> Word document [/Library/Frameworks/R.framework/Versions/3.4/Resources/library/docxtractr/examples/comments.docx]
+#> Word document [C:/Users/Mark/Documents/R/win-library/3.4/docxtractr/examples/comments.docx]
 #> 
 #> Found 3 comments.
 #> # A tibble: 1 x 2
@@ -432,7 +436,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Tue Sep 26 15:24:28 2017"
+#> [1] "Thu Dec 07 07:28:55 2017"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
