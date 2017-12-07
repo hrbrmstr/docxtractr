@@ -17,7 +17,8 @@ Depends:
 License: MIT + file LICENSE
 LazyData: true
 Suggests:
-    testthat
+    testthat,
+    covr
 Imports:
     tools,
     xml2,

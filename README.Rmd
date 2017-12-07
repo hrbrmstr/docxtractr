@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
+[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hrbrmstr/docxtractr?branch=master&svg=true)](https://ci.appveyor.com/project/hrbrmstr/docxtractr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
 
 ![](docxtractr-logo.png)
 
