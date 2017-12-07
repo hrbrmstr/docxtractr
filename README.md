@@ -1,45 +1,76 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
+
+[![Travis-CI Build
+Status](https://travis-ci.org/hrbrmstr/docxtractr.svg?branch=master)](https://travis-ci.org/hrbrmstr/docxtractr)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/hrbrmstr/docxtractr?branch=master&svg=true)](https://ci.appveyor.com/project/hrbrmstr/docxtractr)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/hrbrmstr/docxtractr/master.svg)](https://codecov.io/github/hrbrmstr/docxtractr?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/docxtractr)](http://cran.r-project.org/package=docxtractr)
 
 ![](docxtractr-logo.png)
 
-docxtractr
-==========
+# docxtractr
 
-An R package for extracting tables & comments out of Word documents (docx). Development versions are available here and production versions are [on CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
+Extract Data Tables and Comments from ‘Microsoft’ ‘Word’ Documents
 
-Microsoft Word docx files provide an XML structure that is fairly straightforward to navigate, especially when it applies to Word tables. The docxtractr package provides tools to determine table count, table structure and extract tables from Microsoft Word docx documents.
+## Description
 
-Many tables in Word documents are in twisted formats where there may be labels or other oddities mixed in that make it difficult to work with the underlying data. `docxtractr` provides a function—`assign_colnames`—that makes it easy to identify a particular row in a scraped (or any, really) `data.frame` as the one containing column names and have it become the column names, removing it and (optionally) all of the rows before it (since that's usually what needs to be done).
+An R package for extracting tables & comments out of Word documents
+(docx). Development versions are available here and production versions
+are [on
+CRAN](https://cran.rstudio.com/web/packages/docxtractr/index.html).
 
-What's in the tin?
-------------------
+Microsoft Word docx files provide an XML structure that is fairly
+straightforward to navigate, especially when it applies to Word tables.
+The docxtractr package provides tools to determine table count, table
+structure and extract tables from Microsoft Word docx documents.
+
+Many tables in Word documents are in twisted formats where there may be
+labels or other oddities mixed in that make it difficult to work with
+the underlying data. `docxtractr` provides a
+function—`assign_colnames`—that makes it easy to identify a
+particular row in a scraped (or any, really) `data.frame` as the one
+containing column names and have it become the column names, removing it
+and (optionally) all of the rows before it (since that’s usually what
+needs to be done).
+
+## What’s in the tin?
 
 The following functions are implemented:
 
--   `read_docx`: Read in a Word document for table extraction
--   `docx_describe_tbls`: Returns a description of all the tables in the Word document
--   `docx_describe_cmntss`: Returns a description of all the comments in the Word document
--   `docx_extract_tbl`: Extract a table from a Word document
--   `docx_extract_cmnts`: Extract comments from a Word document
--   `docx_extract_all`: Extract all tables from a Word document (deprecated)
--   `docx_tbl_count`: Get number of tables in a Word document
--   `docx_cmnt_count`: Get number of comments in a Word document
--   `assign_colnames`: Make a specific row the column names for the specified data.frame
--   `mcga` : Make column names great again
+  - `read_docx`: Read in a Word document for table extraction
+  - `docx_describe_tbls`: Returns a description of all the tables in the
+    Word document
+  - `docx_describe_cmnts`: Returns a description of all the comments in
+    the Word document
+  - `docx_extract_tbl`: Extract a table from a Word document
+  - `docx_extract_cmnts`: Extract comments from a Word document
+  - `docx_extract_all_tbls`: Extract all tables from a Word document
+    (`docx_extract_all` is now deprecated)
+  - `docx_tbl_count`: Get number of tables in a Word document
+  - `docx_cmnt_count`: Get number of comments in a Word document
+  - `assign_colnames`: Make a specific row the column names for the
+    specified data.frame
+  - `mcga` : Make column names great again
 
 The following data file are included:
 
--   `system.file("examples/data.docx", package="docxtractr")`: Word docx with 1 table
--   `system.file("examples/data3.docx", package="docxtractr")`: Word docx with 3 tables
--   `system.file("examples/none.docx", package="docxtractr")`: Word docx with 0 tables
--   `system.file("examples/complex.docx", package="docxtractr")`: Word docx with non-uniform tables
--   `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
--   `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
+  - `system.file("examples/data.docx", package="docxtractr")`: Word docx
+    with 1 table
+  - `system.file("examples/data3.docx", package="docxtractr")`: Word
+    docx with 3 tables
+  - `system.file("examples/none.docx", package="docxtractr")`: Word docx
+    with 0 tables
+  - `system.file("examples/complex.docx", package="docxtractr")`: Word
+    docx with non-uniform tables
+  - `system.file("examples/comments.docx", package="docxtractr")`: Word
+    docx with comments
+  - `system.file("examples/realworld.docx", package="docxtractr")`: A
+    “real world” Word docx file with tables of all shapes and sizes
 
-Installation
-------------
+## Installation
 
 ``` r
 # devtools::install_github("hrbrmstr/docxtractr")
@@ -47,8 +78,7 @@ Installation
 install.packages("docxtractr")
 ```
 
-Usage
------
+## Usage
 
 ``` r
 library(docxtractr)
@@ -63,7 +93,7 @@ library(dplyr)
 #> 
 #>     intersect, setdiff, setequal, union
 
-# current verison
+# current version
 packageVersion("docxtractr")
 #> [1] '0.4.0'
 
@@ -275,8 +305,7 @@ docx_tbl_count(real_world)
 #> [1] 8
 
 # get all the tables
-tbls <- docx_extract_all(real_world)
-#> docx_extract_all() is deprecated; use docx_extract_all_tbls()
+tbls <- docx_extract_all_tbls(real_world)
 
 # see table 1
 tbls[[1]]
@@ -419,8 +448,7 @@ glimpse(docx_extract_all_cmnts(cmnts))
 #> $ comment_text <chr> "This is the first comment", "This is the second comment", "This is a reply to the second comm...
 ```
 
-Test Results
-------------
+## Test Results
 
 ``` r
 library(docxtractr)
@@ -432,15 +460,17 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Tue Sep 26 15:24:28 2017"
+#> [1] "Thu Dec  7 05:56:26 2017"
 
 test_dir("tests/")
 #> testthat results ========================================================================================================
-#> OK: 10 SKIPPED: 0 FAILED: 0
+#> OK: 16 SKIPPED: 0 FAILED: 0
 #> 
 #> DONE ===================================================================================================================
 ```
 
 ### Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.
