@@ -59,34 +59,3 @@ docx_extract_all <- function(docx, guess_header=TRUE, preserve=FALSE, trim=TRUE)
   message("docx_extract_all() is deprecated; use docx_extract_all_tbls()")
   docx_extract_all_tbls(docx, guess_header, preserve, trim)
 }
-
-#' Extract all comments from a Word document
-#'
-#' @param docx \code{docx} object read with \code{read_docx}
-#' @return \code{data_frame} of comment id, author & text
-#' @export
-#' @examples
-#' cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
-#' docx_cmnt_count(cmnts)
-#' docx_describe_cmnts(cmnts)
-#' docx_extract_all_cmnts(cmnts)
-docx_extract_all_cmnts <- function(docx) {
-
-  ensure_docx(docx)
-  if (docx_cmnt_count(docx) < 1) return(data_frame())
-
-  ns <- docx$ns
-
-  comments <- docx$cmnts
-
-  purrr::map_df(xml2::xml_attrs(comments), function(x) {
-    as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
-  }) -> meta
-
-  bind_cols(meta,
-            cbind.data.frame(comment_text=xml2::xml_text(comments),
-                             stringsAsFactors=FALSE)) -> out
-
-  as_tibble(out)
-
-}
