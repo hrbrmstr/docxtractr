@@ -5,7 +5,7 @@ Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
     person("Mark", "Dulhunty", role = c("ctb")),
-    person("Karlo", "Martins", role = c("ctb"), email = "guidonimartins@gmail.com")
+    person("Karlo", "Guidoni-Martins", role = c("ctb"), email = "kguidonimartins@gmail.com")
   )
 Maintainer: Bob Rudis <bob@rud.is>
 Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fairly
