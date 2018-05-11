@@ -29,11 +29,9 @@ read_docx <- function(path) {
     httr::stop_for_status(res)
   } else {
     path <- path.expand(path)
+    if (!file.exists(path)) stop(sprintf("Cannot find '%s'", path), call.=FALSE)
     # copy docx to zip (not entirely necessary)
-    file_copy <- file.copy(path, tmpf)
-    if (!file_copy) {
-      stop(sprintf("Cannot find '%s'", path), call.=FALSE)
-    }
+    file.copy(path, tmpf)
   }
   # unzip it
   unzip(tmpf, exdir=sprintf("%s/docdata", tmpd))
