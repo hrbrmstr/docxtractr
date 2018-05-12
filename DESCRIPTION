@@ -5,7 +5,8 @@ Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
     person("Mark", "Dulhunty", role = c("ctb")),
-    person("Karlo", "Guidoni-Martins", role = c("ctb"), email = "kguidonimartins@gmail.com")
+    person("Karlo", "Guidoni-Martins", role = c("ctb"), email = "kguidonimartins@gmail.com"), 
+    person("Chris", "Muir", email = "chrismuirrva@gmail.com", role = c("aut", "ctb"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
 Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fairly
@@ -31,3 +32,5 @@ Imports:
     utils,
     httr
 RoxygenNote: 6.0.1.9000
+SystemRequirements: LibreOffice (<https://www.libreoffice.org/>) required to extract 
+    data from .doc files.
