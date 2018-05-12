@@ -1,6 +1,8 @@
 #' Read in a Word document for table extraction
 #'
-#' Local file path or URL pointing to a \code{.docx} file.
+#' Local file path or URL pointing to a \code{.docx} file. Can also take
+#' \code{.doc} file as input if \code{LibreOffice} is installed
+#' (see \url{https://www.libreoffice.org/} for more info and to download).
 #'
 #' @param path path to the Word document
 #' @importFrom xml2 read_xml
@@ -15,24 +17,66 @@
 #' }
 read_docx <- function(path) {
 
+  stopifnot(is.character(path))
+
   # make temporary things for us to work with
   tmpd <- tempdir()
   tmpf <- tempfile(tmpdir=tmpd, fileext=".zip")
 
+  # Check to see if input is a .doc file
+  is_input_doc <- is_doc(path)
+
+  # If input is a .doc file, create a temp .doc file
+  if (is_input_doc) {
+    tmpf_doc <- tempfile(tmpdir = tmpd, fileext = ".doc")
+    tmpf_docx <- gsub("\\.doc$", ".docx", tmpf_doc)
+  } else {
+    tmpf_doc <- NULL
+    tmpf_docx <- NULL
+  }
+
   on.exit({ #cleanup
     unlink(tmpf)
+    unlink(tmpf_doc)
+    unlink(tmpf_docx)
     unlink(sprintf("%s/docdata", tmpd), recursive=TRUE)
   })
 
   if (is_url(path)) {
-    res <- httr::GET(path, write_disk(tmpf))
-    httr::stop_for_status(res)
+    if (is_input_doc) {
+      # If input is a url pointing to a .doc file, write file to disk
+      res <- httr::GET(path, write_disk(tmpf_doc))
+      httr::stop_for_status(res)
+
+      # Save .doc file as a .docx file using LibreOffice command-line tools.
+      convert_doc_to_docx(tmpd, tmpf_doc)
+
+      # copy output of LibreOffice to zip (not entirely necessary)
+      file_copy(tmpf_docx, tmpf)
+    } else {
+      # If input is a url pointing to a .docx file, write file to disk
+      res <- httr::GET(path, write_disk(tmpf))
+      httr::stop_for_status(res)
+    }
   } else {
     path <- path.expand(path)
     if (!file.exists(path)) stop(sprintf("Cannot find '%s'", path), call.=FALSE)
-    # copy docx to zip (not entirely necessary)
-    file.copy(path, tmpf)
+
+    # If input is a .doc file, save it as a .docx file using LibreOffice
+    # command-line tools.
+    if (is_input_doc) {
+      file_copy(path, tmpf_doc)
+      convert_doc_to_docx(tmpd, tmpf_doc)
+
+      # copy output of LibreOffice to zip (not entirely necessary)
+      file_copy(tmpf_docx, tmpf)
+    } else {
+      # Otherwise, if input is a .docx file, just copy docx to zip
+      # (not entirely necessary)
+      file_copy(path, tmpf)
+    }
   }
+
   # unzip it
   unzip(tmpf, exdir=sprintf("%s/docdata", tmpd))
 

@@ -32,3 +32,54 @@ has_header <- function(tbl, rows, ns) {
 is_url <- function(path) { grepl("^(http|ftp)s?://", path) }
 
 is_docx <- function(path) { tolower(tools::file_ext(path)) == "docx" }
+
+is_doc <- function(path) { tolower(tools::file_ext(path)) == "doc" }
+
+# Copy a file to a new location, throw an error if the copy fails.
+file_copy <- function(from, to) {
+  fc <- file.copy(from, to)
+  if (!fc) stop(sprintf("file copy failure for file %s", from), call.=FALSE)
+}
+
+# Save a .doc file as a new .docx file, using the LibreOffice command line
+# tools.
+convert_doc_to_docx <- function(docx_dir, doc_file) {
+  lo_path <- getOption("path_to_libreoffice")
+  if (is.null(lo_path)) {
+    stop("Cannot determine file path to LibreOffice. ",
+         "To download LibreOffice, visit: https://www.libreoffice.org/ \n",
+         "If you've already downloaded the software, use function ",
+         "'set_libreoffice_path()' to point R to your local 'soffice.exe' file",
+         call. = FALSE)
+  }
+  cmd <- sprintf('"%s" -convert-to docx:"MS Word 2007 XML" -headless -outdir "%s" "%s"',
+                 lo_path,
+                 docx_dir,
+                 doc_file)
+  system(cmd, show.output.on.console = FALSE)
+}
+
+
+#' Point to Local soffice.exe File
+#'
+#' Function to set an option that points to the local LibreOffice file
+#' \code{soffice.exe}.
+#'
+#' @param path
+#'
+#' @details For a list of possible file path locations for \code{soffice.exe},
+#'  see \url{https://github.com/hrbrmstr/docxtractr/issues/5#issuecomment-233181976}
+#'
+#' @return Returns nothing, function sets the option variable
+#'  \code{path_to_libreoffice}.
+#' @export
+#'
+#' @examples \dontrun{
+#' set_libreoffice_path("local/path/to/soffice.exe")
+#' }
+set_libreoffice_path <- function(path) {
+  stopifnot(is.character(path))
+
+  if (!file.exists(path)) stop(sprintf("Cannot find '%s'", path), call.=FALSE)
+  options("path_to_libreoffice" = path)
+}

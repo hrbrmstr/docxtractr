@@ -10,7 +10,9 @@ read_docx(path)
 \item{path}{path to the Word document}
 }
 \description{
-Local file path or URL pointing to a \code{.docx} file.
+Local file path or URL pointing to a \code{.docx} file. Can also take
+\code{.doc} file as input if \code{LibreOffice} is installed
+(see \url{https://www.libreoffice.org/} for more info and to download).
 }
 \examples{
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
