@@ -52,11 +52,29 @@ convert_doc_to_docx <- function(docx_dir, doc_file) {
          "'set_libreoffice_path()' to point R to your local 'soffice.exe' file",
          call. = FALSE)
   }
+  if (Sys.info()["sysname"] == "Windows") {
+    convert_win(lo_path, docx_dir, doc_file)
+  } else {
+    convert_osx(lo_path, docx_dir, doc_file)
+  }
+}
+
+# .docx to .doc convertion for Windows
+convert_win <- function(lo_path, docx_dir, doc_file) {
   cmd <- sprintf('"%s" -convert-to docx:"MS Word 2007 XML" -headless -outdir "%s" "%s"',
                  lo_path,
                  docx_dir,
                  doc_file)
   system(cmd, show.output.on.console = FALSE)
+}
+
+# .docx to .doc convertion for OSX
+convert_osx <- function(lo_path, docx_dir, doc_file) {
+  cmd <- sprintf('"%s" --convert-to docx:"MS Word 2007 XML" --headless --outdir "%s" "%s"',
+                 lo_path,
+                 docx_dir,
+                 doc_file)
+  res <- system(cmd, intern = TRUE)
 }
 
 
@@ -65,7 +83,7 @@ convert_doc_to_docx <- function(docx_dir, doc_file) {
 #' Function to set an option that points to the local LibreOffice file
 #' \code{soffice.exe}.
 #'
-#' @param path
+#' @param path path to the LibreOffice soffice file
 #'
 #' @details For a list of possible file path locations for \code{soffice.exe},
 #'  see \url{https://github.com/hrbrmstr/docxtractr/issues/5#issuecomment-233181976}
