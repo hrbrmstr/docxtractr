@@ -46,11 +46,7 @@ file_copy <- function(from, to) {
 convert_doc_to_docx <- function(docx_dir, doc_file) {
   lo_path <- getOption("path_to_libreoffice")
   if (is.null(lo_path)) {
-    stop("Cannot determine file path to LibreOffice. ",
-         "To download LibreOffice, visit: https://www.libreoffice.org/ \n",
-         "If you've already downloaded the software, use function ",
-         "'set_libreoffice_path()' to point R to your local 'soffice.exe' file",
-         call. = FALSE)
+    stop(lo_path_missing, call. = FALSE)
   }
   if (Sys.info()["sysname"] == "Windows") {
     convert_win(lo_path, docx_dir, doc_file)
@@ -101,3 +97,61 @@ set_libreoffice_path <- function(path) {
   if (!file.exists(path)) stop(sprintf("Cannot find '%s'", path), call.=FALSE)
   options("path_to_libreoffice" = path)
 }
+
+# Assert that LibreOffice file "soffice" exists locally.
+# Check env variable "path_to_libreoffice". If it's NULL, call lo_find(), which
+# will try to determine the local path to LibreOffice file "soffice". If
+# lo_find() is successful, the path to "soffice" will be assigned to env
+# variable "path_to_libreoffice", otherwise an error is thrown.
+lo_assert <- function() {
+  lo_path <- getOption("path_to_libreoffice")
+
+  if (is.null(lo_path)) {
+    lo_path <- lo_find()
+    set_libreoffice_path(lo_path)
+  }
+}
+
+# Returns the local path to LibreOffice file "soffice". Search is performed by
+# looking in the known file locations for the current OS. If OS is not Linux,
+# OSX, or Windows, an error is thrown. If path to "soffice" is not found, an
+# error is thrown.
+lo_find <- function() {
+  user_os <- Sys.info()["sysname"]
+  if (!user_os %in% names(lo_paths_to_check)) {
+    stop(lo_path_missing, call. = FALSE)
+  }
+
+  lo_path <- NULL
+  for (path in lo_paths_to_check[[user_os]]) {
+    if (file.exists(path)) {
+      lo_path <- path
+      break
+    }
+  }
+
+  if (is.null(lo_path)) {
+    stop(lo_path_missing, call. = FALSE)
+  }
+
+  lo_path
+}
+
+# List obj containing known locations of LibreOffice file "soffice".
+lo_paths_to_check <- list(
+  "Linux" = c("/usr/bin/soffice",
+              "/usr/local/bin/soffice"),
+  "Darwin" = c("/Applications/LibreOffice.app/Contents/MacOS/soffice",
+               "~/Applications/LibreOffice.app/Contents/MacOS/soffice"),
+  "Windows" = c("C:\\Program Files\\LibreOffice\\program\\soffice.exe",
+                "C:\\progra~1\\libreo~1\\program\\soffice.exe")
+)
+
+# Error message thrown if LibreOffice file "soffice" cannot be found.
+lo_path_missing <- paste(
+  "LibreOffice software required to read '.doc' files.",
+  "Cannot determine file path to LibreOffice.",
+  "To download LibreOffice, visit: https://www.libreoffice.org/ \n",
+  "If you've already downloaded the software, use function",
+  "'set_libreoffice_path()' to point R to your local 'soffice.exe' file"
+)
