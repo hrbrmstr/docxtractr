@@ -7,7 +7,7 @@
 set_libreoffice_path(path)
 }
 \arguments{
-\item{path}{}
+\item{path}{path to the LibreOffice soffice file}
 }
 \value{
 Returns nothing, function sets the option variable
