@@ -1,3 +1,8 @@
+# 0.5.0
+
+- .doc input supported (via Chris Muir)
+- UTF-8 filename support for Windows-1252 locale
+
 # 0.4.0
 
 - add a `preserve` logical paramater to tbl extraction functions to support preserving

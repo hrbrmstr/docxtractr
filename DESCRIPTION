@@ -13,8 +13,9 @@ Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fa
     straightforward to navigate, especially when it applies to 'Word' tables and
     comments. Tools are provided to determine table count/structure, comment count
     and also to extract/clean tables and comments from 'Microsoft Word' 'docx' documents.
-URL: http://github.com/hrbrmstr/docxtractr
-BugReports: https://github.com/hrbrmstr/docxtractr/issues
+    There is also nascent support for '.doc' files.
+URL: http://gitlab.com/hrbrmstr/docxtractr
+BugReports: https://gitlab.com/hrbrmstr/docxtractr/issues
 Encoding: UTF-8
 Depends:
     R (>= 3.2.0)

@@ -70,7 +70,7 @@ options(width=120)
 
 ## Usage
 
-```{r sample}
+```{r libs, message=FALSE, warning=FALSE}
 library(docxtractr)
 library(tibble)
 library(dplyr)
@@ -78,6 +78,9 @@ library(dplyr)
 # current version
 packageVersion("docxtractr")
 
+```
+
+```{r sample}
 # one table
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
 

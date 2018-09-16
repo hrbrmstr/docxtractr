@@ -1,7 +1,19 @@
-Updating the package as per a note from Uwe regarding xml2
-deprecated functions. There is also some new functionality
-in the package.
+## Test environments
+* local OS X install, R 3.5.1
+* ubuntu 14.04 (on travis-ci), R 3.5.1
+* win-builder (devel and release)
 
-The package has been tested under r-devel
-debian, r-devel Win and the standard R installs of those
-and macOS + Ubuntu.
+## R CMD check results
+
+0 errors | 0 warnings | 0 note
+
+* This is a maintenance release
+
+## Reverse dependencies
+
+None.
+
+---
+
+This is an update with a few new API calls and support
+for .doc files.
