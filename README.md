@@ -54,6 +54,7 @@ The following functions are implemented:
   - `assign_colnames`: Make a specific row the column names for the
     specified data.frame
   - `mcga` : Make column names great again
+  - `set_libreoffice_path`: Point to Local soffice.exe File
 
 The following data file are included:
 
@@ -452,7 +453,7 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Sun Sep 16 13:14:13 2018"
+#> [1] "Sun Sep 16 13:17:27 2018"
 
 test_dir("tests/")
 #> ✔ | OK F W S | Context
