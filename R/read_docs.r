@@ -28,6 +28,7 @@ read_docx <- function(path) {
 
   # If input is a .doc file, create a temp .doc file
   if (is_input_doc) {
+    lo_assert()
     tmpf_doc <- tempfile(tmpdir = tmpd, fileext = ".doc")
     tmpf_docx <- gsub("\\.doc$", ".docx", tmpf_doc)
   } else {
