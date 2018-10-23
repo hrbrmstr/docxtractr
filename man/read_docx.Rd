@@ -4,10 +4,21 @@
 \alias{read_docx}
 \title{Read in a Word document for table extraction}
 \usage{
-read_docx(path)
+read_docx(path, track_changes = NULL)
 }
 \arguments{
 \item{path}{path to the Word document}
+
+\item{track_changes}{if not \code{NULL} (the default) then must be one of
+"\code{accept}" or "\code{reject}" which will, respectively, accept all or
+reject all changes. NOTE: this functionality relies on the
+\code{pandoc} utility being available on the system \code{PATH}. Both
+system \code{PATH} and the \code{RSTUDIO_PANDOC} (RStudio ships with
+a copy of \code{pandoc}) environment variables will be checked.
+If no \code{pandoc} binary is found then a warning will be issued
+and the document will be read without integrating or ignoring
+any tracked changes. The original Word document \emph{will not be modified}
+and this feature \emph{only works} with \code{docx} files.}
 }
 \description{
 Local file path or URL pointing to a \code{.docx} file. Can also take
@@ -17,6 +28,12 @@ Local file path or URL pointing to a \code{.docx} file. Can also take
 \examples{
 doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
 class(doc)
+
+doc <- read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr"),
+  track_changes = "accept"
+)
+
 \dontrun{
 # from a URL
 }

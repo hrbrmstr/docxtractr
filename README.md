@@ -70,6 +70,8 @@ The following data file are included:
     docx with comments
   - `system.file("examples/realworld.docx", package="docxtractr")`: A
     “real world” Word docx file with tables of all shapes and sizes
+  - `system.file("examples/trackchanges.docx", package="docxtractr")`:
+    Word docx with track changes in a table
 
 ## Installation
 
@@ -88,7 +90,7 @@ library(dplyr)
 
 # current version
 packageVersion("docxtractr")
-#> [1] '0.5.0'
+#> [1] '0.6.0'
 ```
 
 ``` r
@@ -441,6 +443,46 @@ glimpse(docx_extract_all_cmnts(cmnts))
 #> $ comment_text <chr> "This is the first comment", "This is the second comment", "This is a reply to the second comm...
 ```
 
+### Track Changes (depends on `pandoc` being available)
+
+``` r
+# original
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr")
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
+#> NOTE: header=FALSE but table has a marked header row in the Word document
+#> [[1]]
+#> # A tibble: 1 x 1
+#>   V1   
+#>   <chr>
+#> 1 21
+
+# accept
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr"),
+  track_changes = "accept"
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
+#> [[1]]
+#> # A tibble: 1 x 1
+#>   V1   
+#>   <chr>
+#> 1 2
+
+# reject
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr"),
+  track_changes = "reject"
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
+#> [[1]]
+#> # A tibble: 1 x 1
+#>   V1   
+#>   <chr>
+#> 1 1
+```
+
 ## Test Results
 
 ``` r
@@ -453,14 +495,14 @@ library(testthat)
 #>     matches
 
 date()
-#> [1] "Sun Sep 16 13:17:27 2018"
+#> [1] "Tue Oct 23 08:10:10 2018"
 
 test_dir("tests/")
 #> ✔ | OK F W S | Context
-#> ══ testthat results  ═════════════════════════════════════════════════════════════════════════════════════════
+#> ══ testthat results  ═════════════════════════════════════════════════
 #> OK: 16 SKIPPED: 0 FAILED: 0
 #> 
-#> ══ Results ═══════════════════════════════════════════════════════════════════════════════════════════════════
+#> ══ Results ═══════════════════════════════════════════════════════════
 #> Duration: 0.2 s
 #> 
 #> OK:       0

@@ -10,7 +10,7 @@
 #' @docType package
 #'
 #' @author Bob Rudis (bob@@rud.is)
-#' @importFrom xml2 xml_find_all xml_text xml_ns xml_find_first xml_attrs
+#' @importFrom xml2 xml_find_all xml_text xml_ns xml_find_first xml_attrs read_xml
 #' @importFrom tibble data_frame as_data_frame as_tibble
 #' @importFrom dplyr bind_cols count arrange select
 #' @importFrom tools file_ext

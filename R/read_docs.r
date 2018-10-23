@@ -4,20 +4,39 @@
 #' \code{.doc} file as input if \code{LibreOffice} is installed
 #' (see \url{https://www.libreoffice.org/} for more info and to download).
 #'
+#' @md
 #' @param path path to the Word document
-#' @importFrom xml2 read_xml
+#' @param track_changes if not `NULL` (the default) then must be one of
+#'        "`accept`" or "`reject`" which will, respectively, accept all or
+#'        reject all changes. NOTE: this functionality relies on the
+#'        `pandoc` utility being available on the system `PATH`. Both
+#'        system `PATH` and the `RSTUDIO_PANDOC` (RStudio ships with
+#'        a copy of `pandoc`) environment variables will be checked.
+#'        If no `pandoc` binary is found then a warning will be issued
+#'        and the document will be read without integrating or ignoring
+#'        any tracked changes. The original Word document *will not be modified*
+#'        and this feature *only works* with `docx` files.
 #' @export
 #' @examples
 #' doc <- read_docx(system.file("examples/data.docx", package="docxtractr"))
 #' class(doc)
+#'
+#' doc <- read_docx(
+#'   system.file("examples/trackchanges.docx", package="docxtractr"),
+#'   track_changes = "accept"
+#' )
+#'
 #' \dontrun{
 #' # from a URL
 # budget <- read_docx(
 # "http://rud.is/dl/1.DOCX")
 #' }
-read_docx <- function(path) {
+read_docx <- function(path, track_changes=NULL) {
 
   stopifnot(is.character(path))
+  if (!is.null(track_changes)) {
+    track_changes <- match.arg(track_changes, c("accept", "reject"))
+  }
 
   # make temporary things for us to work with
   tmpd <- tempdir()
@@ -75,6 +94,33 @@ read_docx <- function(path) {
       # Otherwise, if input is a .docx file, just copy docx to zip
       # (not entirely necessary)
       file_copy(path, tmpf)
+    }
+  }
+
+  if (!is.null(track_changes)) {
+    pandoc_bin <- Sys.which("pandoc")
+    if (pandoc_bin == "") {
+      pandoc_bin <- Sys.getenv("RSTUDIO_PANDOC")
+      if (pandoc_bin == "") {
+        warning(
+          "Track changes option was used but no pandoc binary was found. ",
+          "Please ensure that the directory containing pandoc is available ",
+          "on the system PATH and restart the R session before trying again. ",
+          "Reading in document *without* tracking any changes."
+        )
+      }
+    }
+    if (pandoc_bin != "") {
+      system2(
+        command = pandoc_bin,
+        args = c(
+          "-f", "docx",
+          "-t", "docx",
+          "-o", tmpf,
+          sprintf("--track-changes=%s", track_changes),
+          tmpf
+        )
+      )
     }
   }
 

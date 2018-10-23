@@ -1,3 +1,8 @@
+# 0.6.0
+
+- Enable support for accepting or rejecting tracked changes when
+  reading in the document. Ref #19
+
 # 0.5.0
 
 - .doc input supported (via Chris Muir)

@@ -56,6 +56,7 @@ The following data file are included:
 - `system.file("examples/complex.docx", package="docxtractr")`: Word docx with non-uniform tables
 - `system.file("examples/comments.docx", package="docxtractr")`: Word docx with comments
 - `system.file("examples/realworld.docx", package="docxtractr")`: A "real world" Word docx file with tables of all shapes and sizes
+- `system.file("examples/trackchanges.docx", package="docxtractr")`: Word docx with track changes in a table
 
 ## Installation
 
@@ -174,6 +175,30 @@ cmnts <- read_docx(system.file("examples/comments.docx", package="docxtractr"))
 print(cmnts)
 
 glimpse(docx_extract_all_cmnts(cmnts))
+```
+
+### Track Changes (depends on `pandoc` being available)
+
+```{r track-changes}
+# original
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr")
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
+
+# accept
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr"),
+  track_changes = "accept"
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
+
+# reject
+read_docx(
+  system.file("examples/trackchanges.docx", package="docxtractr"),
+  track_changes = "reject"
+) %>% 
+  docx_extract_all_tbls(guess_header = FALSE)
 ```
 
 ## Test Results
