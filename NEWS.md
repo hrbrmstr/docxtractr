@@ -1,3 +1,7 @@
+# 0.6.1
+
+- Fix for errors introduced by an update of the tidyverse
+
 # 0.6.0
 
 - Enable support for accepting or rejecting tracked changes when

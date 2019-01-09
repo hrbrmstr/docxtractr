@@ -4,8 +4,8 @@
 \alias{docx_extract_tbl}
 \title{Extract a table from a Word document}
 \usage{
-docx_extract_tbl(docx, tbl_number = 1, header = TRUE, preserve = FALSE,
-  trim = TRUE)
+docx_extract_tbl(docx, tbl_number = 1, header = TRUE,
+  preserve = FALSE, trim = TRUE)
 }
 \arguments{
 \item{docx}{\code{docx} object read with \code{read_docx}}

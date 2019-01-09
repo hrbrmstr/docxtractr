@@ -14,14 +14,21 @@
 docx_extract_all_cmnts <- function(docx, include_text=FALSE) {
 
   ensure_docx(docx)
-  if (docx_cmnt_count(docx) < 1) return(tibble::data_frame())
+  if (docx_cmnt_count(docx) < 1) {
+    out <- data.frame(stringsAsFactors=FALSE)
+    class(out) <- c("tbl_df", "tbl", "data.frame")
+    return(out)
+  }
 
   ns <- docx$ns
 
   comments <- docx$cmnts
 
   purrr::map_df(xml2::xml_attrs(comments), function(x) {
-    tibble::as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
+    as.data.frame(
+      t(cbind.data.frame(x, stringsAsFactors=FALSE)),
+      stringsAsFactors=FALSE
+    )
   }) -> meta
 
   dplyr::bind_cols(
@@ -49,6 +56,7 @@ docx_extract_all_cmnts <- function(docx, include_text=FALSE) {
 
   }
 
-  tibble::as_tibble(out)
+  class(out) <- c("tbl_df", "tbl", "data.frame")
+  out
 
 }

@@ -85,7 +85,10 @@ docx_describe_cmnts <- function(docx) {
   cat(sprintf("Found %d comments.\n", length(cmnts)))
 
   purrr::map_df(xml_attrs(cmnts), function(x) {
-    as_data_frame(t(cbind.data.frame(x, stringsAsFactors=FALSE)))
+    as.data.frame(
+      t(cbind.data.frame(x, stringsAsFactors=FALSE)),
+      stringsAsFactors = FALSE
+    )
   }) -> meta
 
   cmnt_df <- dplyr::bind_cols(meta,

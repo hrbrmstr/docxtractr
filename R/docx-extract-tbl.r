@@ -52,7 +52,8 @@ docx_extract_tbl <- function(docx, tbl_number=1, header=TRUE, preserve=FALSE, tr
   }) -> dat
 
   if (header) {
-    colnames(dat) <- dat[1,]
+    hopeful_names <- make.names(dat[1,])
+    colnames(dat) <- hopeful_names
     dat <- dat[-1,]
   } else {
     hdr <- has_header(tbl, rows, ns)
@@ -63,6 +64,7 @@ docx_extract_tbl <- function(docx, tbl_number=1, header=TRUE, preserve=FALSE, tr
 
   rownames(dat) <- NULL
 
-  tibble::as_tibble(dat)
+  class(dat) <- c("tbl_df", "tbl", "data.frame")
+  dat
 
 }
