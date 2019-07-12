@@ -9,3 +9,4 @@ test_that("we can convert a PPTX if LibreOffice Installed", {
     expect_true(file.size(pdf) > 0)
   }
 })
+

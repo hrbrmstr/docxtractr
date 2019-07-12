@@ -16,13 +16,8 @@
 convert_pptx_to_pdf <- function(path, pdf_file = sub("[.]pptx", ".pdf", path)) {
   stopifnot(is_pptx(path))
 
+  lo_assert()
   lo_path <- getOption("path_to_libreoffice")
-  if (is.null(lo_path)) {
-    lo_path <- lo_find()
-  }
-  if (is.null(lo_path)) {
-    stop(lo_path_missing, call. = FALSE)
-  }
 
   # making temporary file because by default soffice
   # will make sub("[.]pptx", ".pdf", path) output
