@@ -9,7 +9,9 @@ convert_pptx_to_pdf(path, pdf_file = sub("[.]pptx", ".pdf", path))
 \arguments{
 \item{path}{path to the PowerPoint document}
 
-\item{pdf_file}{output PDF file name.  By default, creates . This functionality requires the use of
+\item{pdf_file}{output PDF file name.  By default, creates a PDF in the
+same directory as the \code{path} file.
+This functionality requires the use of
 LibreOffice and the \code{soffice} binary it contains.  See
 \link{set_libreoffice_path} for more information.  Note,}
 }

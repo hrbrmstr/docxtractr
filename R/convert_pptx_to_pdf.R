@@ -2,7 +2,9 @@
 #'
 #' @md
 #' @param path path to the PowerPoint document
-#' @param pdf_file output PDF file name.  By default, creates . This functionality requires the use of
+#' @param pdf_file output PDF file name.  By default, creates a PDF in the
+#'        same directory as the `path` file.
+#'        This functionality requires the use of
 #'        LibreOffice and the `soffice` binary it contains.  See
 #'        [set_libreoffice_path] for more information.  Note,
 #' @export
