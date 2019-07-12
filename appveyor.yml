@@ -16,7 +16,7 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
-  - choco install -f libreoffice-fresh
+  - choco install libreoffice-fresh & exit 0
   - travis-tool.sh install_deps
 
 test_script:
