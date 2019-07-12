@@ -1,7 +1,7 @@
 context("PPTX conversion works")
 test_that("we can convert a PPTX if LibreOffice Installed", {
   lp = try({
-    lo_find()
+    docxtractr:::lo_find()
   }, silent = TRUE)
   if (!inherits(lp, "try-error")) {
     path <- system.file("examples/ex.pptx", package = "docxtractr")
