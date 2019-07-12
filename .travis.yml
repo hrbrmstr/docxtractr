@@ -2,9 +2,13 @@ language: R
 sudo: required
 cache: packages
 
+os: 
+  - linux
+  - osx
+  
 before_install:
-  - sudo apt-get update -y
-  - sudo apt-get install libreoffice-core
+  - if [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then brew cask install libreoffice ; fi  
+  - if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then sudo apt-get update -y && sudo apt-get install libreoffice-core; fi
 
 after_success:
   - Rscript -e 'covr::codecov()'
