@@ -33,6 +33,8 @@ is_url <- function(path) { grepl("^(http|ftp)s?://", path) }
 
 is_docx <- function(path) { tolower(tools::file_ext(path)) == "docx" }
 
+is_pptx <- function(path) { tolower(tools::file_ext(path)) == "pptx" }
+
 is_doc <- function(path) { tolower(tools::file_ext(path)) == "doc" }
 
 # Copy a file to a new location, throw an error if the copy fails.
@@ -56,18 +58,22 @@ convert_doc_to_docx <- function(docx_dir, doc_file) {
 }
 
 # .docx to .doc convertion for Windows
-convert_win <- function(lo_path, docx_dir, doc_file) {
-  cmd <- sprintf('"%s" -convert-to docx:"MS Word 2007 XML" -headless -outdir "%s" "%s"',
+convert_win <- function(lo_path, docx_dir, doc_file,
+                        convert_to = 'docx:"MS Word 2007 XML"') {
+  cmd <- sprintf('"%s" --convert-to %s -headless -outdir "%s" "%s"',
                  lo_path,
+                 convert_to,
                  docx_dir,
                  doc_file)
   system(cmd, show.output.on.console = FALSE)
 }
 
 # .docx to .doc convertion for OSX
-convert_osx <- function(lo_path, docx_dir, doc_file) {
-  cmd <- sprintf('"%s" --convert-to docx:"MS Word 2007 XML" --headless --outdir "%s" "%s"',
+convert_osx <- function(lo_path, docx_dir, doc_file,
+                        convert_to = 'docx:"MS Word 2007 XML"') {
+  cmd <- sprintf('"%s" --convert-to %s --headless --outdir "%s" "%s"',
                  lo_path,
+                 convert_to,
                  docx_dir,
                  doc_file)
   res <- system(cmd, intern = TRUE)
