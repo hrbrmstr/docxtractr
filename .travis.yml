@@ -1,6 +1,10 @@
 language: R
-sudo: false
+sudo: required
 cache: packages
+
+before_install:
+  - sudo apt-get update -y
+  - sudo apt-get install libreoffice-core
 
 after_success:
   - Rscript -e 'covr::codecov()'
