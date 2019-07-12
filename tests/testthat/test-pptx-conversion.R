@@ -1,5 +1,5 @@
 context("PPTX conversion works")
-test_that("we can do something", {
+test_that("we can convert a PPTX if LibreOffice Installed", {
   lp = try({
     lo_find
   }, silent = TRUE)
