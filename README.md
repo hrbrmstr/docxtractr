@@ -46,7 +46,7 @@ The following functions are implemented:
   - `docx_describe_cmnts`: Returns a description of all the comments in
     the Word document
   - `docx_extract_tbl`: Extract a table from a Word document
-  - `docx_extract_cmnts`: Extract comments from a Word document
+  - `docx_extract_all_cmnts`: Extract comments from a Word document
   - `docx_extract_all_tbls`: Extract all tables from a Word document
     (`docx_extract_all` is now deprecated)
   - `docx_tbl_count`: Get number of tables in a Word document
