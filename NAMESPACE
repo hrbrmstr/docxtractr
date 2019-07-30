@@ -3,6 +3,7 @@
 S3method(print,docx)
 export("%>%")
 export(assign_colnames)
+export(convert_to_pdf)
 export(docx_cmnt_count)
 export(docx_describe_cmnts)
 export(docx_describe_tbls)

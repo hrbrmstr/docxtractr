@@ -28,8 +28,8 @@
 #'
 #' \dontrun{
 #' # from a URL
-# budget <- read_docx(
-# "http://rud.is/dl/1.DOCX")
+#' budget <- read_docx(
+#' "http://rud.is/dl/1.DOCX")
 #' }
 read_docx <- function(path, track_changes=NULL) {
 
