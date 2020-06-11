@@ -1,7 +1,7 @@
 #' Extract a table from a Word document
 #'
 #' Given a document read with \code{read_docx} and a table to extract (optionally
-#' indicating whether there was a header or not and if cell whitepace trimming is
+#' indicating whether there was a header or not and if cell whitespace trimming is
 #' desired) extract the contents of the table to a \code{data.frame}.
 #'
 #' @md

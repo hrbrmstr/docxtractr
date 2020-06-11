@@ -4,8 +4,13 @@
 \alias{docx_extract_tbl}
 \title{Extract a table from a Word document}
 \usage{
-docx_extract_tbl(docx, tbl_number = 1, header = TRUE,
-  preserve = FALSE, trim = TRUE)
+docx_extract_tbl(
+  docx,
+  tbl_number = 1,
+  header = TRUE,
+  preserve = FALSE,
+  trim = TRUE
+)
 }
 \arguments{
 \item{docx}{\code{docx} object read with \code{read_docx}}
@@ -23,7 +28,7 @@ docx_extract_tbl(docx, tbl_number = 1, header = TRUE,
 }
 \description{
 Given a document read with \code{read_docx} and a table to extract (optionally
-indicating whether there was a header or not and if cell whitepace trimming is
+indicating whether there was a header or not and if cell whitespace trimming is
 desired) extract the contents of the table to a \code{data.frame}.
 }
 \examples{

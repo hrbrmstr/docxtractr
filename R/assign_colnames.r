@@ -8,7 +8,7 @@
 #' rows before it (since that's usually what needs to be done).
 #'
 #' @param dat can be any \code{data.frame} but is intended for use with
-#'        ones retuned by this package
+#'        ones returned by this package
 #' @param row numeric value indicating the row number that is to become
 #'        the column names
 #' @param remove remove row specified by \code{row} after making it

@@ -4,8 +4,7 @@
 \alias{docx_extract_all_tbls}
 \title{Extract all tables from a Word document}
 \usage{
-docx_extract_all_tbls(docx, guess_header = TRUE, preserve = FALSE,
-  trim = TRUE)
+docx_extract_all_tbls(docx, guess_header = TRUE, preserve = FALSE, trim = TRUE)
 }
 \arguments{
 \item{docx}{\code{docx} object read with \code{read_docx}}

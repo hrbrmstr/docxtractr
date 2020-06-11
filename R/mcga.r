@@ -4,7 +4,7 @@
 #'
 #' @md
 #' @param tbl a `data.frame`-like object
-#' @return whatver class `x` was but with truly great, really great column names. They're amazing.
+#' @return whatever class `x` was but with truly great, really great column names. They're amazing.
 #'     Trust me. They'll be incredible column names once we're done.
 #' @export
 #' @examples

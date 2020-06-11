@@ -1,3 +1,7 @@
+# 0.6.2
+
+- Added capability of converting PowerPoint to PDF with `convert_to_pdf` function (pull #21, @muschellij2).
+
 # 0.6.1
 
 - Fix for errors introduced by an update of the tidyverse
@@ -14,7 +18,7 @@
 
 # 0.4.0
 
-- add a `preserve` logical paramater to tbl extraction functions to support preserving
+- add a `preserve` logical parameter to tbl extraction functions to support preserving
   intra-cell whitespace (implements #9)
 - use `httr` vs `download.file()` for URL retrieval (fixes #10)
 

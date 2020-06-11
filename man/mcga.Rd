@@ -10,7 +10,7 @@ mcga(tbl)
 \item{tbl}{a \code{data.frame}-like object}
 }
 \value{
-whatver class \code{x} was but with truly great, really great column names. They're amazing.
+whatever class \code{x} was but with truly great, really great column names. They're amazing.
 Trust me. They'll be incredible column names once we're done.
 }
 \description{

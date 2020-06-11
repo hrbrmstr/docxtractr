@@ -8,7 +8,7 @@ assign_colnames(dat, row, remove = TRUE, remove_previous = remove)
 }
 \arguments{
 \item{dat}{can be any \code{data.frame} but is intended for use with
-ones retuned by this package}
+ones returned by this package}
 
 \item{row}{numeric value indicating the row number that is to become
 the column names}
