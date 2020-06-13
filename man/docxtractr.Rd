@@ -3,7 +3,6 @@
 \docType{package}
 \name{docxtractr}
 \alias{docxtractr}
-\alias{docxtractr-package}
 \title{Extract Data Tables and Comments from 'Microsoft' 'Word' Documents}
 \description{
 Microsoft Word `docx`` files provide an XML structure that is fairly
