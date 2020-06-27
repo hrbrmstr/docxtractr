@@ -14,8 +14,7 @@
 
 # 0.4.0
 
-- add a `preserve` logical paramater to tbl extraction functions to support preserving
-  intra-cell whitespace (implements #9)
+- add a `preserve` logical paramater to tbl extraction functions to support preserving intra-cell whitespace (implements #9)
 - use `httr` vs `download.file()` for URL retrieval (fixes #10)
 
 # 0.3.0 WIP

@@ -1,6 +1,6 @@
 Package: docxtractr
 Title: Extract Data Tables and Comments from 'Microsoft' 'Word' Documents
-Version: 0.6.2
+Version: 0.6.5
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
@@ -14,18 +14,19 @@ Description: 'Microsoft Word' 'docx' files provide an 'XML' structure that is fa
     comments. Tools are provided to determine table count/structure, comment count
     and also to extract/clean tables and comments from 'Microsoft Word' 'docx' documents.
     There is also nascent support for '.doc' files.
-SystemRequirements: LibreOffice (<https://www.libreoffice.org/>) required to extract 
-    data from .doc files.
+SystemRequirements: LibreOffice
+       (<https://www.libreoffice.org/>) required to extract
+       data from .doc files or perform .pptx conversion.
 URL: http://gitlab.com/hrbrmstr/docxtractr
 BugReports: https://gitlab.com/hrbrmstr/docxtractr/issues
 Encoding: UTF-8
-Depends:
-    R (>= 3.2.0)
+Depends: 
+    R (>= 3.6.0)
 License: MIT + file LICENSE
 LazyData: true
-Suggests:
-    testthat,
-    covr
+Suggests: 
+    covr, 
+    tinytest
 Imports: 
     tools,
     xml2,
