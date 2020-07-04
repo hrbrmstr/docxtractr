@@ -1,3 +1,7 @@
+# 0.6.5
+
+- Fix CRAN check errors on Fedora
+
 # 0.6.1
 
 - Fix for errors introduced by an update of the tidyverse

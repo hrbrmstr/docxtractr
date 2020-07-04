@@ -53,7 +53,8 @@ expect_equal(
 )
 
 # docx-conversion ---------------------------------------------------------
-if (at_home()) {
+
+if (at_home()) { # CRAN will not have LibreOffice installed
 
   lp = try({
     docxtractr:::lo_find()
@@ -68,7 +69,7 @@ if (at_home()) {
 
 # pptx conversion ---------------------------------------------------------
 
-if (at_home()) {
+if (at_home()) { # CRAN will not have LibreOffice installed
 
   lp = try({
     docxtractr:::lo_find()
