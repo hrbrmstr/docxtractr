@@ -43,6 +43,24 @@ suppressMessages(x <- capture.output(print(cmnt)))
 
 expect_equal(nrow(docx_extract_all_cmnts(cmnt)), 3)
 
+expect_equal(docx_extract_all_cmnts(cmnt)[2, ][['comment_text']], "This is the second comment")
+
+expect_equal(docx_extract_all_cmnts(cmnt)[2, ][['author']], "boB Rudis")
+
+expect_equal(docx_extract_all_cmnts(cmnt)[2, ][['initials']], "bR")
+
+expect_equal(trimws(docx_extract_all_cmnts(cmnt, include_text = TRUE)[2, ][['word_src']]), "convenire")
+
+cmnt_sdt <- read_docx(system.file("examples/comments-with-sdt.docx", package="docxtractr"))
+
+expect_equal(docx_extract_all_cmnts(cmnt_sdt)[1, ][['comment_text']], "Test comment")
+
+expect_equal(trimws(docx_extract_all_cmnts(cmnt_sdt, include_text = TRUE)[1, ][['word_src']]), "Table of Contents")
+
+expect_equal(docx_extract_all_cmnts(cmnt_sdt)[1, ][['author']], "William Doane")
+
+expect_equal(docx_extract_all_cmnts(cmnt_sdt)[1, ][['initials']], "WD")
+
 real_world <- read_docx(system.file("examples/realworld.docx", package="docxtractr"))
 tbls <- docx_extract_all_tbls(real_world)
 expect_equal(
