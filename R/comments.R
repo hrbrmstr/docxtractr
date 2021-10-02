@@ -43,9 +43,9 @@ docx_extract_all_cmnts <- function(docx, include_text=FALSE) {
     out$word_src <- purrr::map_chr(out$id, ~{
       xml_find_all(
         doc,
-        sprintf("//w:commentRangeStart[@w:id='%s']/following-sibling::*[
-             count(. | //w:commentRangeEnd[@w:id='%s']/preceding-sibling::*) =
-             count(//w:commentRangeEnd[@w:id='%s']/preceding-sibling::*)]",
+        sprintf("//w:commentRangeStart[@w:id='%s']/following::w:t[
+             count(. | //w:commentRangeEnd[@w:id='%s']/preceding::*) =
+             count(//w:commentRangeEnd[@w:id='%s']/preceding::*)]",
                 .x, .x, .x)
       ) %>%
         xml_text() %>%
